@@ -1,0 +1,63 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Find changed asset files
+        id: changed
+        run: |
+          # Get files changed in this push (only assets/)
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- assets/ 2>/dev/null || echo "")
+          if [ -z "$CHANGED" ]; then
+            echo "assets_changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "assets_changed=true" >> $GITHUB_OUTPUT
+            echo "$CHANGED" > /tmp/changed-assets.txt
+            echo "Changed assets:"
+            cat /tmp/changed-assets.txt
+          fi
+
+      - name: Upload changed assets to R2
+        if: steps.changed.outputs.assets_changed == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npm install -g wrangler
+          while IFS= read -r file; do
+            if [ ! -f "$file" ]; then
+              echo "SKIP (deleted): $file"
+              continue
+            fi
+            # Determine content type
+            ext="${file##*.}"
+            ct="application/octet-stream"
+            case "$ext" in
+              woff2) ct="font/woff2" ;;
+              png) ct="image/png" ;;
+              jpg|jpeg) ct="image/jpeg" ;;
+              svg) ct="image/svg+xml" ;;
+              mp4) ct="video/mp4" ;;
+              webm) ct="video/webm" ;;
+            esac
+            # Key is path without "assets/" prefix
+            key="${file#assets/}"
+            echo "Uploading $key ($ct)"
+            wrangler r2 object put "landing-page-assets/$key" --file="$file" --content-type="$ct" --remote
+          done < /tmp/changed-assets.txt
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy . --project-name=landing-page --branch=main

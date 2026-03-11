@@ -1,0 +1,17 @@
+.env
+node_modules
+.wrangler
+luckyrobots-com/
+*.sh
+.DS_Store
+framer-export-test.png
+static-clone-test.png
+.playwright-mcp/
+orig-*.png
+preview-*.png
+awesomic-ref.png
+downloaded-site.png
+gallery.html
+images/
+videos/
+replace-urls.py
