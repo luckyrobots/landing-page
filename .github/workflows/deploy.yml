@@ -55,9 +55,17 @@ jobs:
             wrangler r2 object put "landing-page-assets/$key" --file="$file" --content-type="$ct" --remote
           done < /tmp/changed-assets.txt
 
+      - name: Prepare Pages deploy directory
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp jobs.html _site/
+          # Copy any other HTML files
+          find . -maxdepth 1 -name '*.html' -exec cp {} _site/ \;
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy . --project-name=landing-page --branch=main
+          command: pages deploy _site --project-name=landing-page --branch=main --commit-dirty=true
