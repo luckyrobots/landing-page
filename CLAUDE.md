@@ -46,8 +46,10 @@ python3 -m http.server 8000         # serve at http://localhost:8000
 # → http://localhost:8000/designs.html (picker)
 ```
 
-The switcher pill is always injected, even locally — it's a dev convenience;
-leave it there.
+The switcher pill is **hidden by default**. Append `?switcher=true` to any
+URL (local or deployed) to show it — e.g. `http://localhost:8000/?switcher=true`
+or `https://staging.../magazine.html?switcher=true`. The query param is
+preserved when clicking between designs.
 
 ## Deploy
 

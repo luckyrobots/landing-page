@@ -134,17 +134,19 @@ section.spread{min-height:100vh;padding:clamp(2rem,6vw,6rem);display:flex;flex-d
 </head>
 <body>
 <style>
-.__design_switcher{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:#111;color:#f7f2e8;padding:.35rem .5rem;border-radius:999px;font:500 13px/1 -apple-system,BlinkMacSystemFont,"Inter",sans-serif;z-index:2147483647;display:flex;gap:.25rem;align-items:center;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.__design_switcher{display:none;position:fixed;top:12px;left:50%;transform:translateX(-50%);background:#111;color:#f7f2e8;padding:.35rem .5rem;border-radius:999px;font:500 13px/1 -apple-system,BlinkMacSystemFont,"Inter",sans-serif;z-index:2147483647;gap:.25rem;align-items:center;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.__design_switcher.on{display:flex}
 .__design_switcher>span{padding:.25rem .7rem;opacity:.55;letter-spacing:.08em;text-transform:uppercase;font-size:10px}
 .__design_switcher a{color:inherit;text-decoration:none;padding:.35rem .8rem;border-radius:999px;transition:background .15s}
 .__design_switcher a:hover{background:#2a2a2a}
 .__design_switcher a.active{background:#f7f2e8;color:#111;font-weight:700}
 </style>
-<nav class="__design_switcher">
+<nav class="__design_switcher" id="__design_switcher">
   <span>Design</span>
   <a href="/">Framer</a>
   <a href="/magazine.html" class="active">Magazine</a>
 </nav>
+<script>(function(){if(new URLSearchParams(location.search).get('switcher')==='true'){var el=document.getElementById('__design_switcher');if(el){el.classList.add('on');document.querySelectorAll('#__design_switcher a').forEach(function(a){var u=new URL(a.href,location.origin);u.searchParams.set('switcher','true');a.href=u.pathname+u.search})}}})();</script>
 
 
 <!-- 1. Cover -->
