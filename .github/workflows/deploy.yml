@@ -12,6 +12,15 @@ jobs:
         with:
           fetch-depth: 2
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Render templates (content.yaml → index.html + jobs.html)
+        run: |
+          pip install --quiet pyyaml jinja2
+          python build.py
+
       - name: Find changed asset files
         id: changed
         run: |

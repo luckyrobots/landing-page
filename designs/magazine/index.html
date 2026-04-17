@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morning Edition — {{ site.title }}</title>
+<meta name="description" content="{{ site.description }}">
+<link rel="icon" href="{{ media.favicon_light }}" media="(prefers-color-scheme: light)">
+<link rel="icon" href="{{ media.favicon_dark }}"  media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Morning Edition — {{ site.title }}">
+<meta property="og:description" content="{{ site.description }}">
+<meta property="og:image" content="{{ media.og_image }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#111;
+  --paper:#f7f2e8;
+  --cream:#efe8d8;
+  --midnight:#0b1020;
+  --rose:#f4c6c2;
+  --accent:#d64532;
+  --phosphor:#b8f0ab;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-size:20px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.display{font-family:'Fraunces',serif;font-weight:900;letter-spacing:-.03em;line-height:.9}
+.serif{font-family:'Fraunces',serif}
+
+section.spread{min-height:100vh;padding:clamp(2rem,6vw,6rem);display:flex;flex-direction:column;justify-content:center;border-bottom:2px solid var(--ink);position:relative}
+
+/* 1 — Cover */
+.cover{text-align:center;background:var(--paper)}
+.cover .masthead{font-family:Fraunces;font-weight:900;font-size:clamp(2.5rem,6vw,5rem);text-transform:uppercase;letter-spacing:-.01em;border-top:10px solid var(--ink);border-bottom:2px solid var(--ink);padding:1rem 0;margin-bottom:1.5rem}
+.cover .issue{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:6rem;font-weight:500}
+.cover .issue span{margin:0 .75rem}
+.cover h1{font-size:clamp(4rem,13vw,13rem);font-family:Fraunces;font-weight:900;line-height:.9;letter-spacing:-.05em}
+.cover .lede{max-width:48rem;margin:3rem auto 0;font-size:clamp(1.3rem,2.2vw,1.8rem);line-height:1.4;font-family:Fraunces;font-weight:400;font-style:italic}
+.cover .byline{margin-top:6rem;font-size:1rem;text-transform:uppercase;letter-spacing:.25em}
+
+/* 2 — Terminal */
+.terminal{background:#0a0a0a;color:var(--phosphor)}
+.terminal h2{font-size:clamp(3rem,9vw,8rem);color:var(--phosphor);font-family:Fraunces;font-weight:700;font-style:italic}
+.terminal .sub{margin-top:1rem;font-family:Fraunces;font-style:italic;font-size:1.8rem;color:var(--phosphor);opacity:.7}
+.terminal .log{margin-top:3rem;font-family:'Inter',monospace;font-size:clamp(1.1rem,1.6vw,1.7rem);line-height:1.7;letter-spacing:.02em}
+.terminal .log .ts{opacity:.55;margin-right:1.5rem}
+.terminal .cursor{display:inline-block;width:.6em;height:1.1em;background:var(--phosphor);vertical-align:-.15em;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* 3 — Carousel / midnight */
+.midnight{background:var(--midnight);color:#f3f0e7}
+.midnight .kicker{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;opacity:.6;margin-bottom:1rem}
+.midnight h2{font-size:clamp(3rem,8vw,7rem);line-height:.95;max-width:22ch}
+.midnight .body{max-width:48rem;font-size:clamp(1.2rem,1.6vw,1.5rem);margin-top:2rem;opacity:.85;line-height:1.6}
+.slides{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2.5rem;margin-top:5rem}
+.slide{border-top:3px solid #f3f0e7;padding-top:1rem}
+.slide .n{font-family:Fraunces;font-size:3.5rem;font-weight:900;line-height:1;opacity:.5}
+.slide .cap{font-size:1.25rem;margin-top:.6rem;line-height:1.3;font-family:Fraunces}
+.slide .media{aspect-ratio:4/3;background:#111;border-radius:4px;margin-top:1rem;overflow:hidden;width:100%}
+.slide .media video,.slide .media img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* 4 — RobotGPT / rose */
+.rose{background:var(--rose)}
+.rose::before{content:"ALERT";position:absolute;top:2rem;right:2rem;border:3px solid var(--ink);padding:.5rem 1.5rem;transform:rotate(8deg);font-family:Fraunces;font-weight:900;letter-spacing:.3em;font-size:.9rem}
+.rose .kicker{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:2rem}
+.rose h2{font-size:clamp(2.5rem,5.5vw,4.5rem);max-width:24ch;line-height:1.05}
+.rose .quote{font-family:Fraunces;font-size:clamp(3rem,8vw,8rem);font-weight:900;line-height:.95;margin-top:3rem;letter-spacing:-.03em}
+.rose .quote .hl{background:var(--ink);color:var(--rose);padding:0 .25em}
+
+/* 5 — Features / academic */
+.academic{background:var(--paper)}
+.academic .eyebrow{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:1rem}
+.academic h2{font-size:clamp(2.5rem,6vw,5rem);margin-bottom:4rem;max-width:18ch}
+.academic .feat{display:grid;grid-template-columns:1fr 2fr;gap:3rem;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid var(--ink)}
+.academic .feat:last-child{border-bottom:none}
+.academic .feat .n{font-family:Fraunces;font-size:clamp(4rem,8vw,7rem);font-weight:900;line-height:.9;opacity:.2}
+.academic .feat h3{font-family:Fraunces;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;line-height:1;margin-top:1rem}
+.academic .feat p{font-size:clamp(1.1rem,1.3vw,1.3rem);line-height:1.65;margin-top:1rem}
+.academic .feat p::first-letter{font-family:Fraunces;font-weight:900;font-size:4em;float:left;line-height:.85;padding-right:.1em;padding-top:.1em;color:var(--accent)}
+@media(max-width:700px){.academic .feat{grid-template-columns:1fr}}
+
+/* 6 — Team roster */
+.roster{background:var(--cream)}
+.roster .eyebrow{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:1rem}
+.roster h2{font-size:clamp(3rem,7vw,6rem);margin-bottom:1.5rem}
+.roster .body{font-size:1.3rem;max-width:46rem;margin-bottom:3rem;line-height:1.5;font-family:Fraunces;font-style:italic}
+.roster-grid{columns:3;column-gap:4rem;list-style:none}
+@media(max-width:1000px){.roster-grid{columns:2}}
+@media(max-width:600px){.roster-grid{columns:1}}
+.roster-grid li{break-inside:avoid;padding:1rem 0;border-bottom:1px solid var(--ink);display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.roster-grid .name{font-family:Fraunces;font-weight:700;font-size:1.4rem}
+.roster-grid .role{font-style:italic;text-align:right;opacity:.65;font-size:1rem}
+
+/* 7 — Advisors */
+.advisors-spread{background:var(--accent);color:var(--paper)}
+.advisors-spread .kicker{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:1rem}
+.advisors-spread h2{font-size:clamp(3rem,7vw,6rem)}
+.advisors-spread .lede{font-family:Fraunces;font-style:italic;font-size:clamp(1.6rem,2.6vw,2.3rem);max-width:56rem;margin:2rem 0 5rem;line-height:1.3}
+.advisors-spread ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem}
+.advisors-spread li{font-family:Fraunces;font-weight:700;font-size:clamp(1.5rem,2.6vw,2.4rem);border-top:3px solid var(--paper);padding-top:1rem;line-height:1.1}
+.advisors-spread a{color:var(--paper);text-decoration:none;display:inline-block;padding-bottom:.2rem;border-bottom:2px solid transparent;transition:border .2s}
+.advisors-spread a:hover{border-color:var(--paper)}
+
+/* 8 — Stats */
+.stats{background:var(--paper);text-align:center}
+.stats .eyebrow{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:1rem}
+.stats .num{font-family:Fraunces;font-size:clamp(12rem,36vw,32rem);font-weight:900;line-height:.8;letter-spacing:-.08em;color:var(--accent)}
+.stats h2{font-size:clamp(2rem,5vw,4rem);margin-top:1rem}
+.stats ul{list-style:none;margin-top:5rem;text-align:left;max-width:58rem;margin-left:auto;margin-right:auto}
+.stats li{padding:1.5rem 0;border-bottom:1px solid var(--ink);display:flex;justify-content:space-between;gap:2rem;align-items:baseline}
+.stats li .role{font-family:Fraunces;font-weight:700;font-size:clamp(1.3rem,2vw,1.7rem);line-height:1.2}
+.stats li .loc{font-size:1.1rem;opacity:.7;text-align:right}
+.stats .cta{display:inline-block;margin-top:3rem;font-family:Fraunces;font-weight:700;font-size:1.6rem;border-bottom:3px solid var(--ink);padding-bottom:.3rem;text-decoration:none}
+
+/* 9 — Classified */
+.classified{background:var(--cream)}
+.classified .eyebrow{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:1rem;text-align:center}
+.classified h2{font-family:Fraunces;font-size:clamp(2rem,4.5vw,3.6rem);text-align:center;font-weight:900;letter-spacing:-.02em}
+.classified .box{border:4px double var(--ink);padding:3.5rem 2rem;max-width:56rem;margin:3rem auto;font-family:Fraunces;text-align:center}
+.classified .box p{font-size:clamp(1.3rem,1.8vw,1.7rem);margin:1rem 0;line-height:1.5}
+.classified .box .action{display:inline-block;margin-top:1.5rem;border-bottom:3px solid var(--ink);text-decoration:none;font-weight:700;font-size:1.4rem;padding-bottom:.2rem}
+.classified .finale{text-align:center;max-width:52rem;margin:4rem auto 0;font-family:Fraunces;font-style:italic;font-size:clamp(1.3rem,1.8vw,1.6rem);line-height:1.5}
+
+/* 10 — Colophon */
+.colophon{background:var(--ink);color:var(--paper);text-align:center;padding:8rem 2rem;border-bottom:none}
+.colophon .sig{font-family:Fraunces;font-size:clamp(3rem,7vw,5.5rem);font-weight:900;font-style:italic}
+.colophon .tag{margin-top:1rem;font-size:1rem;text-transform:uppercase;letter-spacing:.3em;opacity:.6}
+.colophon ul{list-style:none;display:flex;justify-content:center;gap:3rem;margin-top:4rem;flex-wrap:wrap}
+.colophon a{color:var(--paper);font-family:Fraunces;font-size:1.4rem;border-bottom:2px solid var(--paper);text-decoration:none;padding-bottom:.3rem}
+.colophon .small{margin-top:4rem;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;opacity:.5}
+</style>
+</head>
+<body>
+
+<!-- 1. Cover -->
+<section class="spread cover">
+  <div class="masthead">The Morning Edition</div>
+  <div class="issue"><span>Vol. 01</span>·<span>No. 001</span>·<span>{{ site.title }} Daily</span></div>
+  <h1 class="display">{{ hero.headline_line1 }}<br>{{ hero.headline_line2 }}</h1>
+  <p class="lede">{{ hero.subtitle }}</p>
+  {% if hero.video is defined %}
+  <div style="max-width:58rem;margin:3rem auto 0;aspect-ratio:16/10;border-radius:8px;overflow:hidden;background:#111">
+    <video src="{{ hero.video }}" poster="{{ hero.video_poster }}" autoplay loop muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover"></video>
+  </div>
+  {% endif %}
+  <div class="byline">— The simulation desk —</div>
+</section>
+
+<!-- 2. Terminal -->
+<section class="spread terminal">
+  <h2 class="display">Live from the simulation.</h2>
+  <div class="sub">Boot log, 16:36 local. Tidy up, living room.</div>
+  <div class="log">
+    {% for e in terminal %}<div><span class="ts">{{ e.time }}</span>{{ e.text }}</div>
+    {% endfor %}
+    <div><span class="ts">16:36:25</span><span class="cursor"></span></div>
+  </div>
+</section>
+
+<!-- 3. Carousel / midnight -->
+<section class="spread midnight">
+  <div class="kicker">Dispatch No. 03 — Field notes</div>
+  <h2 class="display">{{ carousel.heading }}</h2>
+  <p class="body">{{ carousel.body }}</p>
+  <div class="slides">
+    {% for s in carousel.slides %}
+    <div class="slide">
+      <div class="n">{{ '%02d' | format(loop.index) }}</div>
+      <div class="media">
+        {% if s.video is defined %}<video src="{{ s.video }}" poster="{{ s.poster }}" autoplay loop muted playsinline preload="metadata"></video>
+        {% else %}<img src="{{ s.image }}" alt="{{ s.caption }}">{% endif %}
+      </div>
+      <div class="cap">{{ s.caption }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- 4. RobotGPT / rose -->
+<section class="spread rose">
+  <div class="kicker">Dispatch No. 04 — Command line</div>
+  <h2 class="display">{{ robotgpt.heading }}</h2>
+  <div class="quote">{{ robotgpt.phrase.prefix }} {{ robotgpt.phrase.middle }} <span class="hl">{{ robotgpt.phrase.highlight }}</span> {{ robotgpt.phrase.suffix }}<br>{{ robotgpt.phrase.question }}</div>
+</section>
+
+<!-- 5. Features / academic -->
+<section class="spread academic">
+  <div class="eyebrow">Dispatch No. 05 — The platform, examined</div>
+  <h2 class="display">{{ features.heading }}</h2>
+  {% for f in features.list %}
+  <div class="feat">
+    <div>
+      <div class="n">{{ '%02d' | format(loop.index) }}</div>
+      {% if f.icon is defined %}<img src="{{ f.icon }}" alt="" style="width:96px;height:96px;margin:1rem 0;object-fit:contain">{% endif %}
+      <h3>{{ f.title }}</h3>
+    </div>
+    <p>{{ f.body }}</p>
+  </div>
+  {% endfor %}
+</section>
+
+<!-- 6. Team roster -->
+<section class="spread roster">
+  <div class="eyebrow">Dispatch No. 06 — The roster</div>
+  <h2 class="display">{{ team_section.heading }}</h2>
+  <p class="body">{{ team_section.body }}</p>
+  <ul class="roster-grid">
+    {% for m in team %}<li><span class="name">{{ m.name }}</span><span class="role">{{ m.role }}</span></li>{% endfor %}
+  </ul>
+</section>
+
+<!-- 7. Advisors -->
+<section class="spread advisors-spread">
+  <div class="kicker">Dispatch No. 07 — The Brain Trust</div>
+  <h2 class="display">{{ advisors_section.heading }}</h2>
+  <p class="lede">{{ advisors_section.body }}</p>
+  <ul>
+    {% for a in advisors %}<li>{% if a.url %}<a href="{{ a.url }}" target="_blank" rel="noopener">{{ a.name }} →</a>{% else %}{{ a.name }}{% endif %}</li>{% endfor %}
+  </ul>
+</section>
+
+<!-- 8. Stats / open roles -->
+<section class="spread stats">
+  <div class="eyebrow">Dispatch No. 08 — Help wanted</div>
+  <div class="num">{{ jobs_index | length }}</div>
+  <h2 class="display">open roles. hiring now.</h2>
+  <ul>
+    {% for j in jobs_index %}<li><span class="role">{{ j.title }}</span><span class="loc">{{ j.location }}</span></li>{% endfor %}
+  </ul>
+  <a class="cta" href="{{ open_positions.cta_href }}">{{ open_positions.cta_label }} →</a>
+</section>
+
+<!-- 9. Classified / enterprise -->
+<section class="spread classified">
+  <div class="eyebrow">Dispatch No. 09 — Classified</div>
+  <h2>{{ enterprise.heading }}</h2>
+  <div class="box">
+    <p>{{ enterprise.body }}</p>
+    <a class="action" href="{{ enterprise.button_href }}">{{ enterprise.button_label }} →</a>
+  </div>
+  <p class="finale">{{ final_cta.body }}</p>
+  <p style="text-align:center;margin-top:2rem"><a class="action" style="display:inline-block;border-bottom:3px solid var(--ink);text-decoration:none;font-family:Fraunces;font-weight:700;font-size:1.4rem;padding-bottom:.2rem" href="{{ final_cta.button_href }}">{{ final_cta.button_label }} →</a></p>
+</section>
+
+<!-- 10. Colophon -->
+<section class="spread colophon">
+  <div class="sig">— {{ site.title }} —</div>
+  <div class="tag">Published daily · From the simulation</div>
+  <ul>
+    {% for l in footer.links %}<li><a href="{{ l.href }}">{{ l.label }}</a></li>{% endfor %}
+  </ul>
+  <div class="small">End of edition</div>
+</section>
+</body>
+</html>

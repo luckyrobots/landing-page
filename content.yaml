@@ -1,0 +1,285 @@
+# ============================================================================
+# content.yaml — all editable site copy.
+# Edit values here, commit. CI runs `python build.py` → renders HTML → deploys.
+# Preview locally: `python3 build.py`
+# Organized fold-by-fold as they appear on the page.
+# ============================================================================
+
+# ─── shared ─────────────────────────────────────────────────────────────────
+site:
+  title: "Lucky Robots"
+  tagline: "Infinite Data Generation for Robotic AI"
+  description: >-
+    Generate infinite synthetic data to train end-to-end robotic AI models.
+    Seamlessly iterate, train, and test your models in simulation before
+    deploying to the real world.
+  url: "https://luckyrobots.com"
+
+# Brand media (logos, favicons, social share image)
+media:
+  logo_mark:     "https://landingpage.luckyrobots.com/images/6tTbkXggWgQCAJ4DO2QEdXXmgM.svg"
+  logo_footer:   "https://landingpage.luckyrobots.com/images/11KSGbIZoRSg4pjdnUoif6MKHI.svg"
+  favicon_light: "https://landingpage.luckyrobots.com/images/ZClGjMyXTDh5sEOpWQ2jUvEns.png"
+  favicon_dark:  "https://landingpage.luckyrobots.com/images/HHRnDHSw4fL3vZtGtOohKUt0.png"
+  og_image:      "https://landingpage.luckyrobots.com/images/ONuavwvmd2BZIPYbGpXB9QpGlcE.png"
+
+nav:
+  - { label: "RobotGPT",   href: "#robotgpt" }
+  - { label: "Features",   href: "#features" }
+  - { label: "Team",       href: "#team" }
+  - { label: "Open Roles", href: "./jobs" }
+
+# ─── index.html folds ───────────────────────────────────────────────────────
+
+# Fold 1: Hero (Living Room scene + headline)
+hero:
+  headline_line1: "Infinite Data Generation"
+  headline_line2: "for Robotic AI"
+  subtitle: >-
+    Train up to 90% faster and cheaper with hyper-realistic simulations at scale.
+    Generate millions of randomized labeled episodes overnight. No hardware, no
+    manual labeling, no bottlenecks.
+  # Hero scene video (Unitree G1 in living room)
+  video:        "https://landingpage.luckyrobots.com/videos/jrekiKPWFtDVjZKVTENYvuORo.mp4"
+  video_poster: "https://landingpage.luckyrobots.com/images/YHmBV2ispMwaqCYXEHsDVbsSzDs.png"
+
+# Fold 1 (continued): Boot/terminal log next to hero
+# Each line = time + event shown in terminal-style list
+terminal:
+  - { time: "16:36:02", text: "Booting system" }
+  - { time: "16:36:03", text: "Loading initial command" }
+  - { time: "16:36:03", text: '"Tidy up living room"' }
+  - { time: "16:36:03", text: "Starting path" }
+  - { time: "16:36:04", text: "Locating first item" }
+  - { time: "16:36:10", text: "Retrieving item" }
+  - { time: "16:36:16", text: "Item pickup successful" }
+  - { time: "16:36:21", text: 'Task "Pick up item" complete' }
+  - { time: "16:36:24", text: "Locating drop off location" }
+
+# Fold 1 (continued): command composer overlay (the highlighted phrase blocks)
+hero_command:
+  before: "Unitree G1"
+  middle: "robot in a"
+  after: "modern open-plan living space."
+  line2:
+    - "Scan"
+    - "the"
+    - "room"
+  action: "pick and place"
+  object: "clutter"
+  preposition: "into the"
+  container: "bin."
+  line3_pre: "Item locations"
+  line3_mid: "should be"
+  line3_end: "randomly generated."
+  filename: ".../sim/untitled"
+  counter: "1M Episodes"
+  button: "START"
+
+# Fold 2: "Bringing real-world messiness" carousel
+carousel:
+  heading: "Bringing real-world messiness into virtual training"
+  body: >-
+    From cluttered kitchens to rugged terrain, your AI trains in rich,
+    interactive scenes where even the smallest detail shapes behavior. All
+    of the robots and simulations seen here are available today at Lucky
+    Robots — ready to use, train, and extend.
+  # 6 carousel content slides — each is a video (with poster) or still image
+  slides:
+    - caption: "Our new drone model exploring our forest environment"
+      video:   "https://landingpage.luckyrobots.com/videos/svNpRSMqz5a2FZARxLfeCxFadUs.mp4"
+      poster:  "https://landingpage.luckyrobots.com/images/jwoVT3YeJV6cB5rPKBc2luRc.png"
+    - caption: "A Unitree G1 exploring one of our available environments"
+      video:   "https://landingpage.luckyrobots.com/videos/cQbitKD1YN8USmD5DCHVaXxSLc.mp4"
+      poster:  "https://landingpage.luckyrobots.com/images/N0LXO1OuP7NbzzECBSqqpMj3mnc.png"
+    - caption: "Unitree G1 standing in simulation"
+      video:   "https://landingpage.luckyrobots.com/videos/Fz8BsnRlgQCFYCYAeYX5cNngk.mp4"
+      poster:  "https://landingpage.luckyrobots.com/images/z00QpSxMqINlEOnIsNaxY9snQ.png"
+    - caption: "A Unitree G1 exploring one of our available environments"
+      video:   "https://landingpage.luckyrobots.com/videos/WRjpcFLWxK208ble8rg3zcaOlNI.mp4"
+      poster:  "https://landingpage.luckyrobots.com/images/x0XKfTJBViuvbRVTTxEYlq3Uo.png"
+    - caption: "A Hello Robot Stretch 3 ready to use in LuckyRobots"
+      image:   "https://landingpage.luckyrobots.com/images/skBdmCi64GKjAv8vIOcq409nwVo.jpeg"
+    - caption: "A Unitree G1 exploring our outdoor environment"
+      image:   "https://landingpage.luckyrobots.com/images/HIm3hcI6EvDVW1CPehLwTbA3VA.png"
+
+# Fold 3: RobotGPT — natural-language robot control demo
+robotgpt:
+  heading: "Control your scene with natural language – ask your robot to perform tasks like you speak"
+  phrase:
+    prefix: "RobotGPT,"
+    middle: "I think I left my"
+    highlight: "stove"
+    suffix: "on."
+    question: "Can you turn it off for me?"
+
+# Fold 4: Features grid ("Everything you need...")
+features:
+  heading: "Everything you need to train smarter, faster robotic AI"
+  list:
+    - title: "Realistic Physics & Environments"
+      icon:  "https://landingpage.luckyrobots.com/images/JKiFinyAA6wtOq3GJeMxwNRMNk.png"
+      body: >-
+        Train robots in high-fidelity Lucky Engine environments that replicate
+        real-world physics – from precise collisions and friction to sensor
+        feedback and realistic material behaviours.
+    - title: "Infinite synthetic data, on demand"
+      icon:  "https://landingpage.luckyrobots.com/images/T6iXjnsgSUkVKvCc6CxVqna7LA.png"
+      body: >-
+        Generate millions of randomized, labeled training episodes. No physical
+        hardware, no manual labeling, no bottlenecks – just scalable data built
+        to train serious AI.
+    - title: "Cut costs without cutting corners"
+      icon:  "https://landingpage.luckyrobots.com/images/cC0aB4wCzdsrGAJYkexHxlbVcOI.png"
+      body: >-
+        No warehouses, robots, or massive teams required here. Simulate edge
+        cases, iterate faster, and cut development costs and time by up to 90%
+        without compromising quality.
+    - title: "Collaborate, share, and deploy with LuckyHub"
+      icon:  "https://landingpage.luckyrobots.com/images/Kn07Ab7wEOgfSTNSLStXscqpM.png"
+      body: >-
+        Push and pull AI models, share environments, and manage training
+        workflows with a platform built for open robotics development. LuckyHub
+        makes it easy to scale your work and stay in sync.
+
+# Fold 5: Robots showcase ("Choose from any commercially available robot...")
+robots_showcase:
+  heading: "Choose from any commercially available robot or bring your own"
+
+# Fold 6: Team section
+team_section:
+  heading: "The People Behind Lucky Robots"
+  body: >-
+    Backed by belief in a better system, we bring together top talent, backers,
+    and integrations to accelerate the future of robotics. Join us!
+  cta_label: "Join Our Team"
+  cta_href: "./jobs"
+
+# Team members (shown as cards in "People Behind Lucky Robots" section)
+team:
+  - { name: "Devrim",     role: "Founder & CEO" }
+  - { name: "Artia",      role: "Cofounder/COO" }
+  - { name: "Yan",        role: "CTO, Core" }
+  - { name: "Harrison",   role: "Director of Engineering, AI" }
+  - { name: "Anuj",       role: "Founding Research Engineer" }
+  - { name: "Kieran",     role: "Founding Designer" }
+  - { name: "Ethan",      role: "Founding Research Engineer" }
+  - { name: "Constantin", role: "Drone Simulation Engineer" }
+  - { name: "Ludwig",     role: "Senior Game Engine Developer" }
+  - { name: "Noah",       role: "Founding Game Engine Developer" }
+  - { name: "Jim",        role: "Senior Software Engineer" }
+  - { name: "Michael",    role: "Senior Software Engineer" }
+  - { name: "Tommy",      role: "Game Engine Developer" }
+  - { name: "Nur",        role: "CoS / Ops" }
+  - { name: "Neal",       role: "Software Engineer" }
+  - { name: "Emily",      role: "Software Engineer" }
+  - { name: "Ozgur",      role: "CI/CD Engineer" }
+  - { name: "Bailey",     role: "Software Engineer" }
+  - { name: "Gurkan",     role: "Game Engine Developer" }
+  - { name: "Ecem",       role: "VA" }
+
+# Fold 7: Advisors section
+advisors_section:
+  heading: "Advisors Of The Project"
+  body: "These brilliant folks help us find answers when we get stuck."
+
+advisors:
+  - { name: "Yanjie Ze",       url: "https://yanjieze.com/" }
+  - { name: "Chris Paxton",    url: "https://x.com/chris_j_paxton" }
+  - { name: "Roger Dickey",    url: null }
+  - { name: "Neil Nie",        url: "https://x.com/neil_nie_" }
+  - { name: "Chong Zhang",     url: "https://x.com/ChongZitaZhang" }
+  - { name: "Alex Sutherland", url: null }
+
+# Fold 8: Open positions on index
+open_positions:
+  heading: "Open positions"
+  cta_label: "View All Open Roles"
+  cta_href: "./jobs"
+
+jobs_index:
+  - { title: "Software Engineer (C++) - Core/Game Engine",                   type: "Full Time", location: "United States",                   url: "./jobs/software-engineer" }
+  - { title: "Software Engineer (C++) - Core/Game Engine",                   type: "Full Time", location: "Melbourne, Victoria, Australia",  url: "./jobs/software-engineer-2" }
+  - { title: "Rendering Engineer - Core/Game Engine",                        type: "Full Time", location: "Melbourne, Victoria, Australia",  url: "./jobs/rendering-engineer" }
+  - { title: "Research Engineer (ML, Perception and Manipulation)",          type: "Full Time", location: "Remote, Worldwide",               url: "./jobs/research-eng" }
+  - { title: "Founding Research Engineer (ML, Perception and Manipulation)", type: "Full Time", location: "Remote, US",                      url: "./jobs/founding-research-eng" }
+
+job_cta_label: "Apply Now ↗"
+
+# Fold 9: Final CTA (get your robots ready)
+final_cta:
+  heading: "Get your robots ready for the real world."
+  body: >-
+    Whether you're building cutting-edge AI, refining autonomous systems, or
+    accelerating robotics research, Lucky gives you the synthetic data and
+    simulation muscle to move faster — without compromise.
+  button_label: "Get Started"
+  button_href: "./contact"
+
+# Fold 10: Enterprise contact
+enterprise:
+  heading: "Need custom simulations or private cloud deployments?"
+  body: "Get in touch with our Enterprise team."
+  button_label: "Request Demo"
+  button_href: "mailto:hello@luckyrobots.com"
+
+# Fold 11: Footer
+footer:
+  links:
+    - { label: "Visit Our Github",  href: "https://github.com/luckyrobots" }
+    - { label: "Join Us On Discord", href: "https://discord.gg/luckyrobots" }
+    - { label: "Find Us On X",       href: "https://x.com/luckyrobots" }
+
+# ─── jobs.html folds ────────────────────────────────────────────────────────
+
+jobs_page:
+  heading: "Work at Lucky Robots"
+  intro_p1: >-
+    We're Lucky Robots. A small, sharp, fast-moving team building the next
+    generation of robotics and AI. Our mission is to make robotics usable and
+    affordable for everyone.
+  intro_p2: >-
+    Instead of spending months debugging robot arms, we're building powerful AI
+    simulations using Lucky Engine, MuJoCo, and natural language interfaces
+    that let you train robots the way humans learn — by doing.
+
+jobs_aiml:
+  heading: "AI/ML Open positions"
+  positions:
+    - { title: "Research Engineer (ML, Perception and Manipulation)",          type: "Full Time", location: "Remote, Worldwide", url: "./jobs/research-eng" }
+    - { title: "Founding Research Engineer (ML, Perception and Manipulation)", type: "Full Time", location: "Remote, US",        url: "./jobs/founding-research-eng" }
+    - { title: "Sr Research Engineer (ML, Perception and Manipulation)",       type: "Full Time", location: "Remote, Worldwide", url: "./jobs/sr-research-eng" }
+
+harrison_callout:
+  text_before: "Meet Harrison Kinsley, Director of Engineering for AI. He built one of the biggest machine learning audiences on his"
+  link_label: "YouTube channel"
+  link_href: "https://www.youtube.com/user/sentdex"
+  text_after: ". You will work with him hands on."
+
+jobs_engine:
+  heading: "Game Engine Open positions"
+  positions:
+    - { title: "Software Engineer (C++) - Core/Game Engine",                                type: "Full Time", location: "United States",                   url: "./jobs/software-engineer" }
+    - { title: "Software Engineer (C++) - Core/Game Engine",                                type: "Full Time", location: "Melbourne, Victoria, Australia",  url: "./jobs/software-engineer-2" }
+    - { title: "Rendering Engineer - Core/Game Engine",                                     type: "Full Time", location: "Melbourne, Victoria, Australia",  url: "./jobs/rendering-engineer" }
+    - { title: "Software Engineer (C++) - Platform (Linux/macOS) - Core/Game Engine",       type: "Full Time", location: "Remote, Worldwide",               url: "./jobs/software-engineer-platform" }
+    - { title: "Software Engineer (C++) - Platform (Linux/macOS) - Core/Game Engine",       type: "Full Time", location: "Melbourne, Victoria, Australia",  url: "./jobs/software-engineer-platform-2" }
+
+yan_callout:
+  text_before: "Meet Yan Chernikov, our CTO. He built Hazel, the open source game engine behind Lucky, and one of the most respected game engine YouTube channels,"
+  link_label: 'aka "The Cherno"'
+  link_href: "https://www.youtube.com/user/TheChernoProject"
+  text_after: ". You will collaborate with him daily."
+
+jobs_hiring:
+  heading: "We're hiring people who"
+  bullets:
+    - "Want to ship fast, iterate, and work on real problems—not JIRA boards"
+    - "Thrive in small, high-trust teams with ambitious goals"
+    - "Believe robotics should be simple, scalable, and useful for everyone"
+    - "Want to turn ambitious ideas into things people actually use"
+  footer_note: >-
+    If you don't see a perfect fit, but you know you can push the future of
+    robotics forward — reach out anyway.
+  cta_label: "Get In Touch"
+  cta_href: "mailto:hello@luckyrobots.com"

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morning Edition — Lucky Robots</title>
+<meta name="description" content="Generate infinite synthetic data to train end-to-end robotic AI models. Seamlessly iterate, train, and test your models in simulation before deploying to the real world.">
+<link rel="icon" href="https://landingpage.luckyrobots.com/images/ZClGjMyXTDh5sEOpWQ2jUvEns.png" media="(prefers-color-scheme: light)">
+<link rel="icon" href="https://landingpage.luckyrobots.com/images/HHRnDHSw4fL3vZtGtOohKUt0.png"  media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Morning Edition — Lucky Robots">
+<meta property="og:description" content="Generate infinite synthetic data to train end-to-end robotic AI models. Seamlessly iterate, train, and test your models in simulation before deploying to the real world.">
+<meta property="og:image" content="https://landingpage.luckyrobots.com/images/ONuavwvmd2BZIPYbGpXB9QpGlcE.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#111;
+  --paper:#f7f2e8;
+  --cream:#efe8d8;
+  --midnight:#0b1020;
+  --rose:#f4c6c2;
+  --accent:#d64532;
+  --phosphor:#b8f0ab;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-size:20px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.display{font-family:'Fraunces',serif;font-weight:900;letter-spacing:-.03em;line-height:.9}
+.serif{font-family:'Fraunces',serif}
+
+section.spread{min-height:100vh;padding:clamp(2rem,6vw,6rem);display:flex;flex-direction:column;justify-content:center;border-bottom:2px solid var(--ink);position:relative}
+
+/* 1 — Cover */
+.cover{text-align:center;background:var(--paper)}
+.cover .masthead{font-family:Fraunces;font-weight:900;font-size:clamp(2.5rem,6vw,5rem);text-transform:uppercase;letter-spacing:-.01em;border-top:10px solid var(--ink);border-bottom:2px solid var(--ink);padding:1rem 0;margin-bottom:1.5rem}
+.cover .issue{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:6rem;font-weight:500}
+.cover .issue span{margin:0 .75rem}
+.cover h1{font-size:clamp(4rem,13vw,13rem);font-family:Fraunces;font-weight:900;line-height:.9;letter-spacing:-.05em}
+.cover .lede{max-width:48rem;margin:3rem auto 0;font-size:clamp(1.3rem,2.2vw,1.8rem);line-height:1.4;font-family:Fraunces;font-weight:400;font-style:italic}
+.cover .byline{margin-top:6rem;font-size:1rem;text-transform:uppercase;letter-spacing:.25em}
+
+/* 2 — Terminal */
+.terminal{background:#0a0a0a;color:var(--phosphor)}
+.terminal h2{font-size:clamp(3rem,9vw,8rem);color:var(--phosphor);font-family:Fraunces;font-weight:700;font-style:italic}
+.terminal .sub{margin-top:1rem;font-family:Fraunces;font-style:italic;font-size:1.8rem;color:var(--phosphor);opacity:.7}
+.terminal .log{margin-top:3rem;font-family:'Inter',monospace;font-size:clamp(1.1rem,1.6vw,1.7rem);line-height:1.7;letter-spacing:.02em}
+.terminal .log .ts{opacity:.55;margin-right:1.5rem}
+.terminal .cursor{display:inline-block;width:.6em;height:1.1em;background:var(--phosphor);vertical-align:-.15em;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* 3 — Carousel / midnight */
+.midnight{background:var(--midnight);color:#f3f0e7}
+.midnight .kicker{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;opacity:.6;margin-bottom:1rem}
+.midnight h2{font-size:clamp(3rem,8vw,7rem);line-height:.95;max-width:22ch}
+.midnight .body{max-width:48rem;font-size:clamp(1.2rem,1.6vw,1.5rem);margin-top:2rem;opacity:.85;line-height:1.6}
+.slides{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2.5rem;margin-top:5rem}
+.slide{border-top:3px solid #f3f0e7;padding-top:1rem}
+.slide .n{font-family:Fraunces;font-size:3.5rem;font-weight:900;line-height:1;opacity:.5}
+.slide .cap{font-size:1.25rem;margin-top:.6rem;line-height:1.3;font-family:Fraunces}
+.slide .media{aspect-ratio:4/3;background:#111;border-radius:4px;margin-top:1rem;overflow:hidden;width:100%}
+.slide .media video,.slide .media img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* 4 — RobotGPT / rose */
+.rose{background:var(--rose)}
+.rose::before{content:"ALERT";position:absolute;top:2rem;right:2rem;border:3px solid var(--ink);padding:.5rem 1.5rem;transform:rotate(8deg);font-family:Fraunces;font-weight:900;letter-spacing:.3em;font-size:.9rem}
+.rose .kicker{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:2rem}
+.rose h2{font-size:clamp(2.5rem,5.5vw,4.5rem);max-width:24ch;line-height:1.05}
+.rose .quote{font-family:Fraunces;font-size:clamp(3rem,8vw,8rem);font-weight:900;line-height:.95;margin-top:3rem;letter-spacing:-.03em}
+.rose .quote .hl{background:var(--ink);color:var(--rose);padding:0 .25em}
+
+/* 5 — Features / academic */
+.academic{background:var(--paper)}
+.academic .eyebrow{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:1rem}
+.academic h2{font-size:clamp(2.5rem,6vw,5rem);margin-bottom:4rem;max-width:18ch}
+.academic .feat{display:grid;grid-template-columns:1fr 2fr;gap:3rem;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid var(--ink)}
+.academic .feat:last-child{border-bottom:none}
+.academic .feat .n{font-family:Fraunces;font-size:clamp(4rem,8vw,7rem);font-weight:900;line-height:.9;opacity:.2}
+.academic .feat h3{font-family:Fraunces;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;line-height:1;margin-top:1rem}
+.academic .feat p{font-size:clamp(1.1rem,1.3vw,1.3rem);line-height:1.65;margin-top:1rem}
+.academic .feat p::first-letter{font-family:Fraunces;font-weight:900;font-size:4em;float:left;line-height:.85;padding-right:.1em;padding-top:.1em;color:var(--accent)}
+@media(max-width:700px){.academic .feat{grid-template-columns:1fr}}
+
+/* 6 — Team roster */
+.roster{background:var(--cream)}
+.roster .eyebrow{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:1rem}
+.roster h2{font-size:clamp(3rem,7vw,6rem);margin-bottom:1.5rem}
+.roster .body{font-size:1.3rem;max-width:46rem;margin-bottom:3rem;line-height:1.5;font-family:Fraunces;font-style:italic}
+.roster-grid{columns:3;column-gap:4rem;list-style:none}
+@media(max-width:1000px){.roster-grid{columns:2}}
+@media(max-width:600px){.roster-grid{columns:1}}
+.roster-grid li{break-inside:avoid;padding:1rem 0;border-bottom:1px solid var(--ink);display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.roster-grid .name{font-family:Fraunces;font-weight:700;font-size:1.4rem}
+.roster-grid .role{font-style:italic;text-align:right;opacity:.65;font-size:1rem}
+
+/* 7 — Advisors */
+.advisors-spread{background:var(--accent);color:var(--paper)}
+.advisors-spread .kicker{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:1rem}
+.advisors-spread h2{font-size:clamp(3rem,7vw,6rem)}
+.advisors-spread .lede{font-family:Fraunces;font-style:italic;font-size:clamp(1.6rem,2.6vw,2.3rem);max-width:56rem;margin:2rem 0 5rem;line-height:1.3}
+.advisors-spread ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem}
+.advisors-spread li{font-family:Fraunces;font-weight:700;font-size:clamp(1.5rem,2.6vw,2.4rem);border-top:3px solid var(--paper);padding-top:1rem;line-height:1.1}
+.advisors-spread a{color:var(--paper);text-decoration:none;display:inline-block;padding-bottom:.2rem;border-bottom:2px solid transparent;transition:border .2s}
+.advisors-spread a:hover{border-color:var(--paper)}
+
+/* 8 — Stats */
+.stats{background:var(--paper);text-align:center}
+.stats .eyebrow{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:1rem}
+.stats .num{font-family:Fraunces;font-size:clamp(12rem,36vw,32rem);font-weight:900;line-height:.8;letter-spacing:-.08em;color:var(--accent)}
+.stats h2{font-size:clamp(2rem,5vw,4rem);margin-top:1rem}
+.stats ul{list-style:none;margin-top:5rem;text-align:left;max-width:58rem;margin-left:auto;margin-right:auto}
+.stats li{padding:1.5rem 0;border-bottom:1px solid var(--ink);display:flex;justify-content:space-between;gap:2rem;align-items:baseline}
+.stats li .role{font-family:Fraunces;font-weight:700;font-size:clamp(1.3rem,2vw,1.7rem);line-height:1.2}
+.stats li .loc{font-size:1.1rem;opacity:.7;text-align:right}
+.stats .cta{display:inline-block;margin-top:3rem;font-family:Fraunces;font-weight:700;font-size:1.6rem;border-bottom:3px solid var(--ink);padding-bottom:.3rem;text-decoration:none}
+
+/* 9 — Classified */
+.classified{background:var(--cream)}
+.classified .eyebrow{font-size:1rem;text-transform:uppercase;letter-spacing:.3em;margin-bottom:1rem;text-align:center}
+.classified h2{font-family:Fraunces;font-size:clamp(2rem,4.5vw,3.6rem);text-align:center;font-weight:900;letter-spacing:-.02em}
+.classified .box{border:4px double var(--ink);padding:3.5rem 2rem;max-width:56rem;margin:3rem auto;font-family:Fraunces;text-align:center}
+.classified .box p{font-size:clamp(1.3rem,1.8vw,1.7rem);margin:1rem 0;line-height:1.5}
+.classified .box .action{display:inline-block;margin-top:1.5rem;border-bottom:3px solid var(--ink);text-decoration:none;font-weight:700;font-size:1.4rem;padding-bottom:.2rem}
+.classified .finale{text-align:center;max-width:52rem;margin:4rem auto 0;font-family:Fraunces;font-style:italic;font-size:clamp(1.3rem,1.8vw,1.6rem);line-height:1.5}
+
+/* 10 — Colophon */
+.colophon{background:var(--ink);color:var(--paper);text-align:center;padding:8rem 2rem;border-bottom:none}
+.colophon .sig{font-family:Fraunces;font-size:clamp(3rem,7vw,5.5rem);font-weight:900;font-style:italic}
+.colophon .tag{margin-top:1rem;font-size:1rem;text-transform:uppercase;letter-spacing:.3em;opacity:.6}
+.colophon ul{list-style:none;display:flex;justify-content:center;gap:3rem;margin-top:4rem;flex-wrap:wrap}
+.colophon a{color:var(--paper);font-family:Fraunces;font-size:1.4rem;border-bottom:2px solid var(--paper);text-decoration:none;padding-bottom:.3rem}
+.colophon .small{margin-top:4rem;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;opacity:.5}
+</style>
+</head>
+<body>
+<style>
+.__design_switcher{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:#111;color:#f7f2e8;padding:.35rem .5rem;border-radius:999px;font:500 13px/1 -apple-system,BlinkMacSystemFont,"Inter",sans-serif;z-index:2147483647;display:flex;gap:.25rem;align-items:center;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.__design_switcher>span{padding:.25rem .7rem;opacity:.55;letter-spacing:.08em;text-transform:uppercase;font-size:10px}
+.__design_switcher a{color:inherit;text-decoration:none;padding:.35rem .8rem;border-radius:999px;transition:background .15s}
+.__design_switcher a:hover{background:#2a2a2a}
+.__design_switcher a.active{background:#f7f2e8;color:#111;font-weight:700}
+</style>
+<nav class="__design_switcher">
+  <span>Design</span>
+  <a href="/">Framer</a>
+  <a href="/magazine.html" class="active">Magazine</a>
+</nav>
+
+
+<!-- 1. Cover -->
+<section class="spread cover">
+  <div class="masthead">The Morning Edition</div>
+  <div class="issue"><span>Vol. 01</span>·<span>No. 001</span>·<span>Lucky Robots Daily</span></div>
+  <h1 class="display">Infinite Data Generation<br>for Robotic AI</h1>
+  <p class="lede">Train up to 90% faster and cheaper with hyper-realistic simulations at scale. Generate millions of randomized labeled episodes overnight. No hardware, no manual labeling, no bottlenecks.</p>
+  
+  <div style="max-width:58rem;margin:3rem auto 0;aspect-ratio:16/10;border-radius:8px;overflow:hidden;background:#111">
+    <video src="https://landingpage.luckyrobots.com/videos/jrekiKPWFtDVjZKVTENYvuORo.mp4" poster="https://landingpage.luckyrobots.com/images/YHmBV2ispMwaqCYXEHsDVbsSzDs.png" autoplay loop muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover"></video>
+  </div>
+  
+  <div class="byline">— The simulation desk —</div>
+</section>
+
+<!-- 2. Terminal -->
+<section class="spread terminal">
+  <h2 class="display">Live from the simulation.</h2>
+  <div class="sub">Boot log, 16:36 local. Tidy up, living room.</div>
+  <div class="log">
+    <div><span class="ts">16:36:02</span>Booting system</div>
+    <div><span class="ts">16:36:03</span>Loading initial command</div>
+    <div><span class="ts">16:36:03</span>"Tidy up living room"</div>
+    <div><span class="ts">16:36:03</span>Starting path</div>
+    <div><span class="ts">16:36:04</span>Locating first item</div>
+    <div><span class="ts">16:36:10</span>Retrieving item</div>
+    <div><span class="ts">16:36:16</span>Item pickup successful</div>
+    <div><span class="ts">16:36:21</span>Task "Pick up item" complete</div>
+    <div><span class="ts">16:36:24</span>Locating drop off location</div>
+    
+    <div><span class="ts">16:36:25</span><span class="cursor"></span></div>
+  </div>
+</section>
+
+<!-- 3. Carousel / midnight -->
+<section class="spread midnight">
+  <div class="kicker">Dispatch No. 03 — Field notes</div>
+  <h2 class="display">Bringing real-world messiness into virtual training</h2>
+  <p class="body">From cluttered kitchens to rugged terrain, your AI trains in rich, interactive scenes where even the smallest detail shapes behavior. All of the robots and simulations seen here are available today at Lucky Robots — ready to use, train, and extend.</p>
+  <div class="slides">
+    
+    <div class="slide">
+      <div class="n">01</div>
+      <div class="media">
+        <video src="https://landingpage.luckyrobots.com/videos/svNpRSMqz5a2FZARxLfeCxFadUs.mp4" poster="https://landingpage.luckyrobots.com/images/jwoVT3YeJV6cB5rPKBc2luRc.png" autoplay loop muted playsinline preload="metadata"></video>
+        
+      </div>
+      <div class="cap">Our new drone model exploring our forest environment</div>
+    </div>
+    
+    <div class="slide">
+      <div class="n">02</div>
+      <div class="media">
+        <video src="https://landingpage.luckyrobots.com/videos/cQbitKD1YN8USmD5DCHVaXxSLc.mp4" poster="https://landingpage.luckyrobots.com/images/N0LXO1OuP7NbzzECBSqqpMj3mnc.png" autoplay loop muted playsinline preload="metadata"></video>
+        
+      </div>
+      <div class="cap">A Unitree G1 exploring one of our available environments</div>
+    </div>
+    
+    <div class="slide">
+      <div class="n">03</div>
+      <div class="media">
+        <video src="https://landingpage.luckyrobots.com/videos/Fz8BsnRlgQCFYCYAeYX5cNngk.mp4" poster="https://landingpage.luckyrobots.com/images/z00QpSxMqINlEOnIsNaxY9snQ.png" autoplay loop muted playsinline preload="metadata"></video>
+        
+      </div>
+      <div class="cap">Unitree G1 standing in simulation</div>
+    </div>
+    
+    <div class="slide">
+      <div class="n">04</div>
+      <div class="media">
+        <video src="https://landingpage.luckyrobots.com/videos/WRjpcFLWxK208ble8rg3zcaOlNI.mp4" poster="https://landingpage.luckyrobots.com/images/x0XKfTJBViuvbRVTTxEYlq3Uo.png" autoplay loop muted playsinline preload="metadata"></video>
+        
+      </div>
+      <div class="cap">A Unitree G1 exploring one of our available environments</div>
+    </div>
+    
+    <div class="slide">
+      <div class="n">05</div>
+      <div class="media">
+        <img src="https://landingpage.luckyrobots.com/images/skBdmCi64GKjAv8vIOcq409nwVo.jpeg" alt="A Hello Robot Stretch 3 ready to use in LuckyRobots">
+      </div>
+      <div class="cap">A Hello Robot Stretch 3 ready to use in LuckyRobots</div>
+    </div>
+    
+    <div class="slide">
+      <div class="n">06</div>
+      <div class="media">
+        <img src="https://landingpage.luckyrobots.com/images/HIm3hcI6EvDVW1CPehLwTbA3VA.png" alt="A Unitree G1 exploring our outdoor environment">
+      </div>
+      <div class="cap">A Unitree G1 exploring our outdoor environment</div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- 4. RobotGPT / rose -->
+<section class="spread rose">
+  <div class="kicker">Dispatch No. 04 — Command line</div>
+  <h2 class="display">Control your scene with natural language – ask your robot to perform tasks like you speak</h2>
+  <div class="quote">RobotGPT, I think I left my <span class="hl">stove</span> on.<br>Can you turn it off for me?</div>
+</section>
+
+<!-- 5. Features / academic -->
+<section class="spread academic">
+  <div class="eyebrow">Dispatch No. 05 — The platform, examined</div>
+  <h2 class="display">Everything you need to train smarter, faster robotic AI</h2>
+  
+  <div class="feat">
+    <div>
+      <div class="n">01</div>
+      <img src="https://landingpage.luckyrobots.com/images/JKiFinyAA6wtOq3GJeMxwNRMNk.png" alt="" style="width:96px;height:96px;margin:1rem 0;object-fit:contain">
+      <h3>Realistic Physics & Environments</h3>
+    </div>
+    <p>Train robots in high-fidelity Lucky Engine environments that replicate real-world physics – from precise collisions and friction to sensor feedback and realistic material behaviours.</p>
+  </div>
+  
+  <div class="feat">
+    <div>
+      <div class="n">02</div>
+      <img src="https://landingpage.luckyrobots.com/images/T6iXjnsgSUkVKvCc6CxVqna7LA.png" alt="" style="width:96px;height:96px;margin:1rem 0;object-fit:contain">
+      <h3>Infinite synthetic data, on demand</h3>
+    </div>
+    <p>Generate millions of randomized, labeled training episodes. No physical hardware, no manual labeling, no bottlenecks – just scalable data built to train serious AI.</p>
+  </div>
+  
+  <div class="feat">
+    <div>
+      <div class="n">03</div>
+      <img src="https://landingpage.luckyrobots.com/images/cC0aB4wCzdsrGAJYkexHxlbVcOI.png" alt="" style="width:96px;height:96px;margin:1rem 0;object-fit:contain">
+      <h3>Cut costs without cutting corners</h3>
+    </div>
+    <p>No warehouses, robots, or massive teams required here. Simulate edge cases, iterate faster, and cut development costs and time by up to 90% without compromising quality.</p>
+  </div>
+  
+  <div class="feat">
+    <div>
+      <div class="n">04</div>
+      <img src="https://landingpage.luckyrobots.com/images/Kn07Ab7wEOgfSTNSLStXscqpM.png" alt="" style="width:96px;height:96px;margin:1rem 0;object-fit:contain">
+      <h3>Collaborate, share, and deploy with LuckyHub</h3>
+    </div>
+    <p>Push and pull AI models, share environments, and manage training workflows with a platform built for open robotics development. LuckyHub makes it easy to scale your work and stay in sync.</p>
+  </div>
+  
+</section>
+
+<!-- 6. Team roster -->
+<section class="spread roster">
+  <div class="eyebrow">Dispatch No. 06 — The roster</div>
+  <h2 class="display">The People Behind Lucky Robots</h2>
+  <p class="body">Backed by belief in a better system, we bring together top talent, backers, and integrations to accelerate the future of robotics. Join us!</p>
+  <ul class="roster-grid">
+    <li><span class="name">Devrim</span><span class="role">Founder & CEO</span></li><li><span class="name">Artia</span><span class="role">Cofounder/COO</span></li><li><span class="name">Yan</span><span class="role">CTO, Core</span></li><li><span class="name">Harrison</span><span class="role">Director of Engineering, AI</span></li><li><span class="name">Anuj</span><span class="role">Founding Research Engineer</span></li><li><span class="name">Kieran</span><span class="role">Founding Designer</span></li><li><span class="name">Ethan</span><span class="role">Founding Research Engineer</span></li><li><span class="name">Constantin</span><span class="role">Drone Simulation Engineer</span></li><li><span class="name">Ludwig</span><span class="role">Senior Game Engine Developer</span></li><li><span class="name">Noah</span><span class="role">Founding Game Engine Developer</span></li><li><span class="name">Jim</span><span class="role">Senior Software Engineer</span></li><li><span class="name">Michael</span><span class="role">Senior Software Engineer</span></li><li><span class="name">Tommy</span><span class="role">Game Engine Developer</span></li><li><span class="name">Nur</span><span class="role">CoS / Ops</span></li><li><span class="name">Neal</span><span class="role">Software Engineer</span></li><li><span class="name">Emily</span><span class="role">Software Engineer</span></li><li><span class="name">Ozgur</span><span class="role">CI/CD Engineer</span></li><li><span class="name">Bailey</span><span class="role">Software Engineer</span></li><li><span class="name">Gurkan</span><span class="role">Game Engine Developer</span></li><li><span class="name">Ecem</span><span class="role">VA</span></li>
+  </ul>
+</section>
+
+<!-- 7. Advisors -->
+<section class="spread advisors-spread">
+  <div class="kicker">Dispatch No. 07 — The Brain Trust</div>
+  <h2 class="display">Advisors Of The Project</h2>
+  <p class="lede">These brilliant folks help us find answers when we get stuck.</p>
+  <ul>
+    <li><a href="https://yanjieze.com/" target="_blank" rel="noopener">Yanjie Ze →</a></li><li><a href="https://x.com/chris_j_paxton" target="_blank" rel="noopener">Chris Paxton →</a></li><li>Roger Dickey</li><li><a href="https://x.com/neil_nie_" target="_blank" rel="noopener">Neil Nie →</a></li><li><a href="https://x.com/ChongZitaZhang" target="_blank" rel="noopener">Chong Zhang →</a></li><li>Alex Sutherland</li>
+  </ul>
+</section>
+
+<!-- 8. Stats / open roles -->
+<section class="spread stats">
+  <div class="eyebrow">Dispatch No. 08 — Help wanted</div>
+  <div class="num">5</div>
+  <h2 class="display">open roles. hiring now.</h2>
+  <ul>
+    <li><span class="role">Software Engineer (C++) - Core/Game Engine</span><span class="loc">United States</span></li><li><span class="role">Software Engineer (C++) - Core/Game Engine</span><span class="loc">Melbourne, Victoria, Australia</span></li><li><span class="role">Rendering Engineer - Core/Game Engine</span><span class="loc">Melbourne, Victoria, Australia</span></li><li><span class="role">Research Engineer (ML, Perception and Manipulation)</span><span class="loc">Remote, Worldwide</span></li><li><span class="role">Founding Research Engineer (ML, Perception and Manipulation)</span><span class="loc">Remote, US</span></li>
+  </ul>
+  <a class="cta" href="./jobs">View All Open Roles →</a>
+</section>
+
+<!-- 9. Classified / enterprise -->
+<section class="spread classified">
+  <div class="eyebrow">Dispatch No. 09 — Classified</div>
+  <h2>Need custom simulations or private cloud deployments?</h2>
+  <div class="box">
+    <p>Get in touch with our Enterprise team.</p>
+    <a class="action" href="mailto:hello@luckyrobots.com">Request Demo →</a>
+  </div>
+  <p class="finale">Whether you're building cutting-edge AI, refining autonomous systems, or accelerating robotics research, Lucky gives you the synthetic data and simulation muscle to move faster — without compromise.</p>
+  <p style="text-align:center;margin-top:2rem"><a class="action" style="display:inline-block;border-bottom:3px solid var(--ink);text-decoration:none;font-family:Fraunces;font-weight:700;font-size:1.4rem;padding-bottom:.2rem" href="./contact">Get Started →</a></p>
+</section>
+
+<!-- 10. Colophon -->
+<section class="spread colophon">
+  <div class="sig">— Lucky Robots —</div>
+  <div class="tag">Published daily · From the simulation</div>
+  <ul>
+    <li><a href="https://github.com/luckyrobots">Visit Our Github</a></li><li><a href="https://discord.gg/luckyrobots">Join Us On Discord</a></li><li><a href="https://x.com/luckyrobots">Find Us On X</a></li>
+  </ul>
+  <div class="small">End of edition</div>
+</section>
+</body>
+</html>
