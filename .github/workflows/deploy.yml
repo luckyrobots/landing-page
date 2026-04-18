@@ -16,15 +16,99 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Render templates (content.yaml → index.html + jobs.html)
+      - name: Render templates (content.yaml → HTML)
         run: |
           pip install --quiet pyyaml jinja2
           python build.py
 
+      - name: Prepare _site directory
+        run: |
+          mkdir -p _site
+          # Root-level HTML (index, jobs, magazine, designs)
+          find . -maxdepth 1 -name '*.html' -exec cp {} _site/ \;
+          # Static subfolders (job detail pages, contact, enterprise)
+          for d in jobs contact enterprise; do
+            if [ -d "$d" ]; then
+              mkdir -p "_site/$d"
+              cp -R "$d/." "_site/$d/"
+            fi
+          done
+          ls -la _site/
+          ls -la _site/jobs/ 2>/dev/null || true
+
+      - name: Fast test — asset + page integrity
+        run: |
+          # Serve _site on :8000 and curl-check everything
+          cd _site && python3 -m http.server 8000 &
+          SERVER_PID=$!
+          cd ..
+          sleep 2
+
+          python3 <<'PY'
+          import re, subprocess, sys
+          from pathlib import Path
+
+          errors = []
+          # Every HTML file must exist, parse, and contain non-trivial body
+          html_files = list(Path('_site').rglob('*.html'))
+          print(f'checking {len(html_files)} HTML files')
+          for f in html_files:
+              body = f.read_text(errors='ignore')
+              if len(body) < 500:
+                  errors.append(f'{f}: too small ({len(body)}B)')
+                  continue
+              if '<html' not in body.lower():
+                  errors.append(f'{f}: no <html> tag')
+              if '{{' in body or '{%' in body:
+                  errors.append(f'{f}: unrendered Jinja tag')
+
+          # Every internal link in root HTMLs returns 200
+          import urllib.request
+          for name in ['index.html','jobs.html','magazine.html']:
+              p = Path('_site')/name
+              if not p.exists(): continue
+              html = p.read_text(errors='ignore')
+              # internal hrefs starting with ./ or /
+              hrefs = set(re.findall(r'href="(\./[^"#?]*|/[^"#?]*)"', html))
+              for h in hrefs:
+                  url = 'http://localhost:8000/' + h.lstrip('./').lstrip('/')
+                  try:
+                      r = urllib.request.urlopen(url, timeout=5)
+                      if r.status != 200:
+                          errors.append(f'{name}: {h} → {r.status}')
+                  except Exception as e:
+                      errors.append(f'{name}: {h} → {e}')
+
+          # R2 assets referenced must all return 200 + non-trivial bytes
+          refs = set()
+          for f in html_files:
+              refs |= set(re.findall(r'https://landingpage\.luckyrobots\.com/[^"\'\s)]+', f.read_text(errors='ignore')))
+          print(f'checking {len(refs)} R2 asset refs')
+          for u in refs:
+              try:
+                  req = urllib.request.Request(u, method='HEAD')
+                  r = urllib.request.urlopen(req, timeout=10)
+                  cl = int(r.headers.get('Content-Length', 0))
+                  if r.status != 200:
+                      errors.append(f'R2 {u}: {r.status}')
+                  elif cl < 100:
+                      errors.append(f'R2 {u}: {cl}B placeholder')
+              except Exception as e:
+                  errors.append(f'R2 {u}: {e}')
+
+          if errors:
+              print(f'\n✗ {len(errors)} errors:')
+              for e in errors[:50]: print(' ', e)
+              sys.exit(1)
+          print(f'\n✓ all checks passed ({len(html_files)} pages, {len(refs)} assets)')
+          PY
+          RC=$?
+          kill $SERVER_PID 2>/dev/null || true
+          exit $RC
+
       - name: Find changed asset files
         id: changed
         run: |
-          # Get files changed in this push (only assets/)
           CHANGED=$(git diff --name-only HEAD~1 HEAD -- assets/ 2>/dev/null || echo "")
           if [ -z "$CHANGED" ]; then
             echo "assets_changed=false" >> $GITHUB_OUTPUT
@@ -43,11 +127,7 @@ jobs:
         run: |
           npm install -g wrangler
           while IFS= read -r file; do
-            if [ ! -f "$file" ]; then
-              echo "SKIP (deleted): $file"
-              continue
-            fi
-            # Determine content type
+            [ ! -f "$file" ] && continue
             ext="${file##*.}"
             ct="application/octet-stream"
             case "$ext" in
@@ -58,19 +138,10 @@ jobs:
               mp4) ct="video/mp4" ;;
               webm) ct="video/webm" ;;
             esac
-            # Key is path without "assets/" prefix
             key="${file#assets/}"
             echo "Uploading $key ($ct)"
             wrangler r2 object put "landing-page-assets/$key" --file="$file" --content-type="$ct" --remote
           done < /tmp/changed-assets.txt
-
-      - name: Prepare Pages deploy directory
-        run: |
-          mkdir -p _site
-          cp index.html _site/
-          cp jobs.html _site/
-          # Copy any other HTML files
-          find . -maxdepth 1 -name '*.html' -exec cp {} _site/ \;
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

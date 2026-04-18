@@ -259,11 +259,9 @@ harrison_callout:
 jobs_engine:
   heading: "Game Engine Open positions"
   positions:
-    - { title: "Software Engineer (C++) - Core/Game Engine",                                type: "Full Time", location: "United States",                   url: "./jobs/software-engineer" }
-    - { title: "Software Engineer (C++) - Core/Game Engine",                                type: "Full Time", location: "Melbourne, Victoria, Australia",  url: "./jobs/software-engineer-2" }
-    - { title: "Rendering Engineer - Core/Game Engine",                                     type: "Full Time", location: "Melbourne, Victoria, Australia",  url: "./jobs/rendering-engineer" }
-    - { title: "Software Engineer (C++) - Platform (Linux/macOS) - Core/Game Engine",       type: "Full Time", location: "Remote, Worldwide",               url: "./jobs/software-engineer-platform" }
-    - { title: "Software Engineer (C++) - Platform (Linux/macOS) - Core/Game Engine",       type: "Full Time", location: "Melbourne, Victoria, Australia",  url: "./jobs/software-engineer-platform-2" }
+    - { title: "Software Engineer (C++) - Core/Game Engine",   type: "Full Time", location: "United States",                   url: "./jobs/software-engineer" }
+    - { title: "Software Engineer (C++) - Core/Game Engine",   type: "Full Time", location: "Melbourne, Victoria, Australia",  url: "./jobs/software-engineer-2" }
+    - { title: "Rendering Engineer - Core/Game Engine",        type: "Full Time", location: "Melbourne, Victoria, Australia",  url: "./jobs/rendering-engineer" }
 
 yan_callout:
   text_before: "Meet Yan Chernikov, our CTO. He built Hazel, the open source game engine behind Lucky, and one of the most respected game engine YouTube channels,"
