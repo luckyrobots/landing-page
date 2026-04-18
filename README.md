@@ -3,7 +3,7 @@
 The source for **[luckyrobots.com](https://luckyrobots.com)**.
 
 - **One file owns all the content** → [`content.yaml`](./content.yaml)
-- **Edit the YAML, push, site updates.** No HTML needed.
+- **Edit the YAML, commit, push, site updates automatically in about 60 seconds.** No HTML needed.
 - Same content can render as **multiple designs** (framer, magazine, …).
 
 ---
