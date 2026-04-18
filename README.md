@@ -49,7 +49,12 @@ jobs_index:
 
 ### Add a full job detail page (at `/jobs/<slug>/`)
 
-Create `content/jobs/<slug>.yaml`:
+Easiest way — invoke the **`/add-a-job`** skill in Claude Code. It will
+ask for title, type, location, slug, category, and the four body sections
+(about / responsibilities / qualifications / bonus), then write the YAML,
+update `content.yaml`, run a local build, and offer to commit + push.
+
+Or do it by hand — create `content/jobs/<slug>.yaml`:
 
 ```yaml
 slug: senior-ml-engineer
