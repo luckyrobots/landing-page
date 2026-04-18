@@ -1,0 +1,44 @@
+# Sr Research Engineer (ML, Perception and Manipulation)
+slug: sr-research-eng
+title: "Sr Research Engineer (ML, Perception and Manipulation)"
+type: "Full Time"
+location: "Remote, Worldwide"
+
+about:
+  - >-
+      Our mission is to build the foundational layer for robotics AI. Lucky Robots is creating a
+      simulation platform that is a game engine built for robots instead of players, where every
+      pixel, object, and interaction is controlled for training. It is the local workspace where
+      developers generate data, train models, and push those models to real robots without
+      rewriting everything each time. The platform produces high fidelity synthetic data at
+      scale so models learn robust manipulation and perception skills, then transfer to physical
+      robots with minimal loss. Your contributions directly shape the systems that make this
+      possible.
+  - >-
+      We work closely as a small team dedicated to building products developers love. We take on
+      ambitious problems and value ownership, thoughtful risk taking, and focused effort. We
+      care about impact and take pride in building tools that save time and energy. People who
+      enjoy learning, thinking deeply, and pushing through hard problems fit well here.
+
+responsibilities:
+  - "Transform real world problems into specific machine learning tasks"
+  - "Design and develop computer vision algorithms"
+  - "Build neural network architectures tailored to simulation and robotics needs"
+  - "Develop and integrate 3D geometry based perception systems"
+  - "Create scalable ML infrastructure for large datasets and reproducible workflows"
+  - "Improve accuracy and efficiency of ML systems on an ongoing basis"
+  - "Deploy ML models to edge devices with limited compute"
+  - "Contribute toward achieving level 5 autonomy for consumer robotics"
+
+qualifications:
+  - "Substantial background in ML for perception including 3D perception, multi class object detection, mapping, and robotics control"
+  - "3+ years experience in ML for robotics or at a leading US based AI startup or US based entity where experience clearly transfers to robotics"
+  - "Experience applying research to production settings"
+  - "Proficiency in Rust or C++ and Python with PyTorch"
+  - "Ability to write clean and reliable code"
+
+bonus:
+  - "Motivation to support and lift your team"
+  - "Curiosity and willingness to learn"
+  - "Energy for solving complex problems"
+  - "Drive to produce your best work"

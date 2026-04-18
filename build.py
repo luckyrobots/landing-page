@@ -18,6 +18,14 @@ except ImportError:
 ROOT = pathlib.Path(__file__).parent
 DATA = yaml.safe_load((ROOT / "content.yaml").read_text())
 
+# Load per-job YAML files from content/jobs/*.yaml
+JOBS = []
+jobs_dir = ROOT / "content" / "jobs"
+if jobs_dir.exists():
+    for f in sorted(jobs_dir.glob("*.yaml")):
+        JOBS.append(yaml.safe_load(f.read_text()))
+DATA["jobs"] = JOBS
+
 # Registered designs: name → (template_dir, out_files)
 DESIGNS = [
     {"name": "framer",   "label": "Framer",   "dir": "templates",        "files": ["index.html", "jobs.html"], "home": "/"},
@@ -77,6 +85,25 @@ def main():
                 dest = ROOT / f'{d["name"]}.html'
             dest.write_text(out)
             print(f"  {d['name']:<9} → {dest.relative_to(ROOT)}  ({len(out):,} B)")
+
+    # Job detail pages — render templates/job-detail.html once per YAML
+    if JOBS:
+        env = Environment(
+            loader=FileSystemLoader(str(ROOT / "templates")),
+            undefined=StrictUndefined,
+            autoescape=False,
+        )
+        tpl = env.get_template("job-detail.html")
+        for j in JOBS:
+            ctx = dict(DATA)
+            ctx["job"] = j
+            ctx["other_jobs"] = [o for o in JOBS if o["slug"] != j["slug"]]
+            out = tpl.render(**ctx)
+            out = inject_switcher(out, "framer")
+            dest = ROOT / "jobs" / j["slug"] / "index.html"
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_text(out)
+            print(f"  job       → {dest.relative_to(ROOT)}  ({len(out):,} B)")
 
     # Switcher landing page
     cards = []

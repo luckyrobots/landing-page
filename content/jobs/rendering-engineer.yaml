@@ -1,0 +1,49 @@
+# Rendering Engineer - Core/Game Engine
+slug: rendering-engineer
+title: "Rendering Engineer - Core/Game Engine"
+type: "Full Time"
+location: "Melbourne, Victoria, Australia"
+
+about:
+  - >-
+      Lucky Robots is building the world’s first "Game Engine for Robotics" - a real-time 3D
+      simulation and training platform where AI learns to move, manipulate, and understand the
+      physical world.
+  - "Our goal is to make large-scale robot training and testing environments accessible and fast."
+  - >-
+      As an early rendering engineer on this team, you’ll have the chance to shape the core
+      rendering systems of the engine itself. We move quickly, experiment often, and value
+      people who enjoy solving complex problems in a fast-paced, collaborative startup
+      environment where idea become reality fast.
+  - >-
+      We’re looking for an experienced Rendering Engineer to join our Rendering team, working on
+      both the backend graphics APIs, high-level renderer, shaders/materials, and various modern
+      rendering techniques.
+
+responsibilities:
+  - "Design, implement, and maintain the various levels and systems of the renderer in our custom robotics game engine"
+  - "Write clean, efficient, and maintainable C++ and shader code, with a strong focus on performance and reliability"
+  - "Optimize the rendering subsystems for stability, scalability, and runtime efficiency"
+  - "Ensure compatibility with a wide range of hardware, especially GPUs"
+  - "Collaborate with other engineers and disciplines (AI, simulation, physics) to integrate new features and improve the developer experience"
+  - "Contribute to architectural discussions and share technical insights that shape the evolution of the engine"
+
+qualifications:
+  - "Bachelor\u2019s degree (or equivalent practical experience) in Computer Science, Software Engineering, or a related field"
+  - "5+ years of professional experience in modern C++ and solid understanding of software architecture"
+  - "5+ years of experience working on rendering/graphics for real-time rendering engines, including graphics APIs such as Vulkan, Direct3D 12, or Metal"
+  - "Strong understanding of modern real-time 3D rendering, including rendering pipelines and modern rendering techniques such as real-time ray tracing and path tracing"
+  - "Strong understanding of 3D engine architecture"
+  - "Solid understanding of GPU hardware architecture and optimization"
+  - "Solid grasp of mathematics for 3D applications - Linear Algebra, Geometry, Calculus, and Trigonometry"
+  - "Proven experience developing high-performance, real-time, and multi-threaded rendering systems"
+  - "Experience with parallel programming and multi-threading, including synchronization, job systems, and data-oriented design"
+  - "Experience working with or building game engines (e.g. Unreal, Unity, or proprietary/in-house engines)"
+  - "Understanding of software development life cycle, software engineering methodologies and practices, and software quality assurance concepts"
+
+bonus:
+  - "Experience and understanding of various game engine systems"
+  - "Experience with C# and scripting systems"
+  - "Experience developing simulation or robotics software"
+  - "Contributions to open-source engine or graphics projects"
+  - "Passion for AI, physics, or the intersection of robotics and interactive 3D environments"

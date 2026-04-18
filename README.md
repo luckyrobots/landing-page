@@ -47,7 +47,35 @@ jobs_index:
     url:      "./jobs/senior-ml-engineer"
 ```
 
-(If the role needs its own detail page at `/jobs/senior-ml-engineer`, also create `jobs/senior-ml-engineer/index.html` — copy one of the existing role pages as a template.)
+### Add a full job detail page (at `/jobs/<slug>/`)
+
+Create `content/jobs/<slug>.yaml`:
+
+```yaml
+slug: senior-ml-engineer
+title: "Senior ML Engineer"
+type: "Full Time"
+location: "Remote, Worldwide"
+
+about:
+  - "One or more paragraphs about the role."
+
+responsibilities:
+  - "What the hire will do day-to-day"
+  - "..."
+
+qualifications:
+  - "Required skill"
+  - "..."
+
+bonus:
+  - "Nice-to-have"
+  - "..."
+```
+
+`build.py` picks up every `content/jobs/*.yaml` and renders a full detail page at `/jobs/<slug>/` using `templates/job-detail.html`. You never touch HTML.
+
+Also add the role's summary to `jobs_index` (or `jobs_aiml` / `jobs_engine`) in `content.yaml` so it appears on the homepage and /jobs listing.
 
 ### Swap the hero headline, subtitle, video, logos
 

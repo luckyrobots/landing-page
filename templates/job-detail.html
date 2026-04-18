@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Founding Research Engineer (ML, Perception and Manipulation) — Lucky Robots</title>
-<meta name="description" content="Founding Research Engineer (ML, Perception and Manipulation) · Full Time · Remote, US — apply to join Lucky Robots.">
-<link rel="icon" href="https://landingpage.luckyrobots.com/images/ZClGjMyXTDh5sEOpWQ2jUvEns.png" media="(prefers-color-scheme: light)">
-<link rel="icon" href="https://landingpage.luckyrobots.com/images/HHRnDHSw4fL3vZtGtOohKUt0.png"  media="(prefers-color-scheme: dark)">
-<meta property="og:title" content="Founding Research Engineer (ML, Perception and Manipulation) — Lucky Robots">
-<meta property="og:description" content="Full Time · Remote, US">
-<meta property="og:image" content="https://landingpage.luckyrobots.com/images/ONuavwvmd2BZIPYbGpXB9QpGlcE.png">
+<title>{{ job.title }} — {{ site.title }}</title>
+<meta name="description" content="{{ job.title }} · {{ job.type }} · {{ job.location }} — apply to join {{ site.title }}.">
+<link rel="icon" href="{{ media.favicon_light }}" media="(prefers-color-scheme: light)">
+<link rel="icon" href="{{ media.favicon_dark }}"  media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="{{ job.title }} — {{ site.title }}">
+<meta property="og:description" content="{{ job.type }} · {{ job.location }}">
+<meta property="og:image" content="{{ media.og_image }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
@@ -80,39 +80,24 @@ footer a:hover { color: var(--ink); }
 </style>
 </head>
 <body>
-<style>
-.__design_switcher{display:none;position:fixed;top:12px;left:50%;transform:translateX(-50%);background:#111;color:#f7f2e8;padding:.35rem .5rem;border-radius:999px;font:500 13px/1 -apple-system,BlinkMacSystemFont,"Inter",sans-serif;z-index:2147483647;gap:.25rem;align-items:center;box-shadow:0 4px 16px rgba(0,0,0,.25)}
-.__design_switcher.on{display:flex}
-.__design_switcher>span{padding:.25rem .7rem;opacity:.55;letter-spacing:.08em;text-transform:uppercase;font-size:10px}
-.__design_switcher a{color:inherit;text-decoration:none;padding:.35rem .8rem;border-radius:999px;transition:background .15s}
-.__design_switcher a:hover{background:#2a2a2a}
-.__design_switcher a.active{background:#f7f2e8;color:#111;font-weight:700}
-</style>
-<nav class="__design_switcher" id="__design_switcher">
-  <span>Design</span>
-  <a href="/" class="active">Framer</a>
-  <a href="/magazine.html">Magazine</a>
-</nav>
-<script>(function(){if(new URLSearchParams(location.search).get('switcher')==='true'){var el=document.getElementById('__design_switcher');if(el){el.classList.add('on');document.querySelectorAll('#__design_switcher a').forEach(function(a){var u=new URL(a.href,location.origin);u.searchParams.set('switcher','true');a.href=u.pathname+u.search})}}})();</script>
-
 
 <header class="topbar">
   <a href="/" class="logo">
     <svg viewBox="0 0 26 17" fill="currentColor"><path d="M18 0.44C22.37 0.44 25.92 3.99 25.92 8.36C25.92 12.73 22.37 16.28 18 16.28H7.92C3.55 16.28 0 12.73 0 8.36C0 3.99 3.55 0.44 7.92 0.44H18ZM7.92 3.32C5.14 3.32 2.88 5.58 2.88 8.36C2.88 11.14 5.14 13.4 7.92 13.4H18C20.78 13.4 23.04 11.14 23.04 8.36C23.04 5.58 20.78 3.32 18 3.32H16.35C16.02 3.32 15.75 3.56 15.55 3.82C15.29 4.17 14.87 4.4 14.4 4.4H11.52C11.05 4.4 10.63 4.17 10.37 3.82C10.17 3.56 9.9 3.32 9.57 3.32H7.92ZM7.92 6.2C9.11 6.2 10.08 7.17 10.08 8.36C10.08 9.55 9.11 10.52 7.92 10.52C6.73 10.52 5.76 9.55 5.76 8.36C5.76 7.17 6.73 6.2 7.92 6.2ZM18 6.2C19.19 6.2 20.16 7.17 20.16 8.36C20.16 9.55 19.19 10.52 18 10.52C16.81 10.52 15.84 9.55 15.84 8.36C15.84 7.17 16.81 6.2 18 6.2Z"/></svg>
-    Lucky Robots
+    {{ site.title }}
   </a>
   <nav>
-    <a href="/#robotgpt">RobotGPT</a><a href="/#features">Features</a><a href="/#team">Team</a><a href="/jobs">Open Roles</a>
+    {% for n in nav %}<a href="{% if n.href.startswith('#') %}/{{ n.href }}{% elif n.href.startswith('./') %}/{{ n.href[2:] }}{% else %}{{ n.href }}{% endif %}">{{ n.label }}</a>{% endfor %}
   </nav>
   <a class="apply" href="#apply">Apply Now</a>
 </header>
 
 <section class="hero">
-  <div class="breadcrumb"><a href="/">Home</a> · <a href="/jobs">Open Roles</a> · Founding Research Engineer (ML, Perception and Manipulation)</div>
-  <h1>Founding Research Engineer (ML, Perception and Manipulation)</h1>
+  <div class="breadcrumb"><a href="/">Home</a> · <a href="/jobs">Open Roles</a> · {{ job.title }}</div>
+  <h1>{{ job.title }}</h1>
   <div class="meta">
-    <span>Full Time</span>
-    <span>Remote, US</span>
+    <span>{{ job.type }}</span>
+    <span>{{ job.location }}</span>
   </div>
   <div class="actions">
     <a class="btn primary" href="#apply">Apply Now ↗</a>
@@ -121,46 +106,46 @@ footer a:hover { color: var(--ink); }
 </section>
 
 <section class="body">
-  
+  {% if job.about %}
   <h2>About the role</h2>
-  <p>Our mission is to build the foundational layer for robotics AI. Lucky Robots is creating a simulation platform that is a game engine built for robots instead of players, where every pixel, object, and interaction is controlled for training. It is the local workspace where developers generate data, train models, and push those models to real robots without rewriting everything each time. The platform produces high fidelity synthetic data at scale so models learn robust manipulation and perception skills, then transfer to physical robots with minimal loss. Your contributions directly shape the systems that make this possible.</p><p>We work closely as a small team dedicated to building products developers love. We take on ambitious problems and value ownership, thoughtful risk taking, and focused effort. We care about impact and take pride in building tools that save time and energy. People who enjoy learning, thinking deeply, and pushing through hard problems fit well here.</p><p>As a Founding Perception Engineer, you will join early and have significant ownership and direct impact on the product and the team.</p><p>Apply even if you do not meet every requirement. Tell us how you can contribute and why this work matters to you.</p><p>If you meet the qualifications but have not held a past robotics or ML role at a US based company, apply for one of the following roles instead:</p><p>Sr Research Engineer (ML, Perception and Manipulation)</p><p>Research Engineer (ML, Perception and Manipulation)</p>
-  
+  {% for p in job.about %}<p>{{ p }}</p>{% endfor %}
+  {% endif %}
 
-  
+  {% if job.responsibilities %}
   <h2>Responsibilities</h2>
-  <ul><li>Transform real world problems into specific machine learning tasks</li><li>Design and develop computer vision algorithms</li><li>Build neural network architectures tailored to simulation and robotics needs</li><li>Develop and integrate 3D geometry based perception systems</li><li>Create scalable ML infrastructure for large datasets and reproducible workflows</li><li>Improve accuracy and efficiency of ML systems on an ongoing basis</li><li>Deploy ML models to edge devices with limited compute</li><li>Contribute toward achieving level 5 autonomy for consumer robotics</li><li>Help hire your future teammates and guide their work</li></ul>
-  
+  <ul>{% for r in job.responsibilities %}<li>{{ r }}</li>{% endfor %}</ul>
+  {% endif %}
 
-  
+  {% if job.qualifications %}
   <h2>Qualifications</h2>
-  <ul><li>Strong background in ML for perception including 3D perception, multi class object detection, mapping, and robotics control</li><li>5+ years experience in ML for robotics or at a leading US based AI startup or US based entity where experience clearly transfers to robotics</li><li>Experience applying research to production settings</li><li>Proficiency in Rust or C++ and Python with PyTorch</li><li>Ability to write clean and reliable code</li></ul>
-  
+  <ul>{% for q in job.qualifications %}<li>{{ q }}</li>{% endfor %}</ul>
+  {% endif %}
 
-  
+  {% if job.bonus %}
   <h2>Bonus</h2>
-  <ul><li>Motivation to support and lift your team</li><li>Curiosity and willingness to learn</li><li>Energy for solving complex problems</li><li>Drive to produce your best work</li></ul>
-  
+  <ul>{% for b in job.bonus %}<li>{{ b }}</li>{% endfor %}</ul>
+  {% endif %}
 </section>
 
 <section class="apply-cta" id="apply">
   <h3>Ready to apply?</h3>
   <p>Send your resume and a short note about why this role.</p>
-  <a class="btn" href="mailto:hiring@luckyrobots.com?subject=Founding%20Research%20Engineer%20%28ML%2C%20Perception%20and%20Manipulation%29">hiring@luckyrobots.com →</a>
+  <a class="btn" href="mailto:hiring@luckyrobots.com?subject={{ job.title | urlencode }}">hiring@luckyrobots.com →</a>
 </section>
 
-
+{% if other_jobs %}
 <section class="other">
   <h3>Other open roles</h3>
   <div class="other-grid">
-    <a href="/jobs/rendering-engineer/"><span class="role">Rendering Engineer - Core/Game Engine</span><span class="loc">Melbourne, Victoria, Australia</span></a><a href="/jobs/research-eng/"><span class="role">Research Engineer (ML, Perception and Manipulation)</span><span class="loc">Remote, Worldwide</span></a><a href="/jobs/software-engineer-2/"><span class="role">Software Engineer (C++) - Core/Game Engine</span><span class="loc">Melbourne, Victoria, Australia</span></a><a href="/jobs/software-engineer/"><span class="role">Software Engineer (C++) - Core/Game Engine</span><span class="loc">United States</span></a><a href="/jobs/sr-research-eng/"><span class="role">Sr Research Engineer (ML, Perception and Manipulation)</span><span class="loc">Remote, Worldwide</span></a>
+    {% for j in other_jobs %}<a href="/jobs/{{ j.slug }}/"><span class="role">{{ j.title }}</span><span class="loc">{{ j.location }}</span></a>{% endfor %}
   </div>
 </section>
-
+{% endif %}
 
 <footer>
-  <div>© Lucky Robots</div>
+  <div>© {{ site.title }}</div>
   <ul>
-    <li><a href="https://github.com/luckyrobots">Visit Our Github</a></li><li><a href="https://discord.gg/luckyrobots">Join Us On Discord</a></li><li><a href="https://x.com/luckyrobots">Find Us On X</a></li>
+    {% for l in footer.links %}<li><a href="{{ l.href }}">{{ l.label }}</a></li>{% endfor %}
   </ul>
 </footer>
 </body>
