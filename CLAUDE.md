@@ -9,8 +9,12 @@ export. Now **content-driven**: all copy, people, jobs, and media refs live
 in `content.yaml`; a Python build step renders Jinja2 templates into static
 HTML. Multiple designs render from the same YAML.
 
-- Primary deploy: **Cloudflare Pages** project `landing-page` → custom domain
-  `staging.landingpage.luckyrobots.com` (subdomain `landing-page-r4b.pages.dev`).
+- Primary deploy: **Cloudflare Pages** project `landing-page`. Same project
+  serves **three custom domains** (all latest `main` deploy):
+  - `luckyrobots.com` — prod
+  - `www.luckyrobots.com` — prod (redirect-compatible)
+  - `staging.landingpage.luckyrobots.com` — staging mirror
+  - `landing-page-r4b.pages.dev` — Cloudflare-assigned subdomain
 - Assets (images, videos, fonts): **Cloudflare R2** bucket
   `landing-page-assets` → `landingpage.luckyrobots.com` (public R2 domain,
   proxied through Cloudflare).
@@ -57,12 +61,22 @@ Git push to `main` → GitHub Actions (`.github/workflows/deploy.yml`):
 
 1. Checkout + setup Python 3.12
 2. `pip install pyyaml jinja2 && python build.py`
-3. Diff `assets/` against previous commit, upload changed files to R2 via
-   `wrangler r2 object put`
-4. Copy all root `*.html` to `_site/`
-5. `wrangler pages deploy _site --project-name=landing-page`
+3. Build `_site/` — root `*.html` + subfolders (`jobs/`, `contact/`, `enterprise/`)
+4. **Fast test gate** — start `python3 -m http.server` over `_site/`; assert:
+   - every HTML file ≥ 500B, parses, no unrendered Jinja tags (`{{` or `{%`)
+   - every internal `href="./..."` or `href="/..."` returns 200
+   - every `landingpage.luckyrobots.com/*` asset returns 200 and > 100B
+   - **any failure aborts the deploy** — no prod push if red
+5. Diff `assets/` against previous commit, upload changed files to R2
+6. `wrangler pages deploy _site --project-name=landing-page`
 
-Live in ~60s. Visible at `https://staging.landingpage.luckyrobots.com/`.
+Live in ~60s on all three domains simultaneously (apex + www + staging).
+
+### Rollback
+
+`git revert HEAD && git push` — next CI run replaces prod with previous
+commit's build. Cloudflare Pages also keeps every deploy permanently;
+instant rollback from the Pages dashboard (Deployments → ⋯ → Rollback).
 
 ## Secrets / tokens
 
