@@ -106,6 +106,9 @@ carousel:
 # Fold 3: RobotGPT — natural-language robot control demo
 robotgpt:
   heading: "Control your scene with natural language – ask your robot to perform tasks like you speak"
+  # Background scene under the quote (a bedroom with stove)
+  video:        "https://landingpage.luckyrobots.com/videos/disCAHkAZBJxdqKc6pJRkaoZTbo.mp4"
+  video_poster: "https://landingpage.luckyrobots.com/images/5UTk04C1H5QqJgb9w8q7W2z4.png"
   phrase:
     prefix: "RobotGPT,"
     middle: "I think I left my"
@@ -145,6 +148,15 @@ features:
 # Fold 5: Robots showcase ("Choose from any commercially available robot...")
 robots_showcase:
   heading: "Choose from any commercially available robot or bring your own"
+  # Line-drawn robot illustrations shown in a row
+  robots:
+    - "https://landingpage.luckyrobots.com/images/1AV4LS9rjfInZ1NyB1GB2HfhyE.png"
+    - "https://landingpage.luckyrobots.com/images/fa3V1vNP2WghyJoADp1eZI5ui8.png"
+    - "https://landingpage.luckyrobots.com/images/PWGZJGbwNlN0n86KNiDoFqy2xm0.png"
+    - "https://landingpage.luckyrobots.com/images/qOKApWIzCkJrke09HwUf1QNNw.png"
+    - "https://landingpage.luckyrobots.com/images/ZUMQ8G3mqIt8dpP0enKRtRFhcA.png"
+    - "https://landingpage.luckyrobots.com/images/pu4Sd6xEyDLDZRE2IGwxLjFGLYo.png"
+    - "https://landingpage.luckyrobots.com/images/GArsIqsbn06bxr0pgvVzRHDFs.png"
 
 # Fold 6: Team section
 team_section:
@@ -215,6 +227,8 @@ final_cta:
     simulation muscle to move faster — without compromise.
   button_label: "Get Started"
   button_href: "./contact"
+  # Background image (robot in a forest)
+  bg_image: "https://landingpage.luckyrobots.com/images/IZAHIpGTt5n6DTGD4DYcYJM9R9Y.png"
 
 # Fold 10: Enterprise contact
 enterprise:

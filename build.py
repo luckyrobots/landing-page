@@ -29,6 +29,7 @@ DATA["jobs"] = JOBS
 # Registered designs: name → (template_dir, out_files)
 DESIGNS = [
     {"name": "framer",   "label": "Framer",   "dir": "templates",        "files": ["index.html", "jobs.html"], "home": "/"},
+    {"name": "main",     "label": "Main",     "dir": "designs/main",     "files": ["index.html"],               "home": "/main.html"},
     {"name": "magazine", "label": "Magazine", "dir": "designs/magazine", "files": ["index.html"],               "home": "/magazine.html"},
 ]
 

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lucky Robots — Infinite Data Generation for Robotic AI</title>
+<meta name="description" content="Generate infinite synthetic data to train end-to-end robotic AI models. Seamlessly iterate, train, and test your models in simulation before deploying to the real world.">
+<link rel="icon" href="https://landingpage.luckyrobots.com/images/ZClGjMyXTDh5sEOpWQ2jUvEns.png" media="(prefers-color-scheme: light)">
+<link rel="icon" href="https://landingpage.luckyrobots.com/images/HHRnDHSw4fL3vZtGtOohKUt0.png"  media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Lucky Robots — Infinite Data Generation for Robotic AI">
+<meta property="og:description" content="Generate infinite synthetic data to train end-to-end robotic AI models. Seamlessly iterate, train, and test your models in simulation before deploying to the real world.">
+<meta property="og:image" content="https://landingpage.luckyrobots.com/images/ONuavwvmd2BZIPYbGpXB9QpGlcE.png">
+<meta property="og:url" content="https://luckyrobots.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://landingpage.luckyrobots.com" crossorigin>
+
+<style>
+/* ─── Fonts (Aeonik from R2) ───────────────────────────────────── */
+@font-face { font-family: "Aeonik"; font-weight: 400; font-display: swap; src: url("https://landingpage.luckyrobots.com/fonts/vnaL9rBM6b5S3aWm54I260AHU.woff2") format("woff2"); }
+@font-face { font-family: "Aeonik"; font-weight: 500; font-display: swap; src: url("https://landingpage.luckyrobots.com/fonts/k5HykTtyg5skn7str4Xse7JNbVw.woff2") format("woff2"); }
+
+/* ─── Tokens ──────────────────────────────────────────────────── */
+:root {
+  --ink:       #0a0a0a;
+  --ink-soft:  #2a2a2a;
+  --muted:     #737373;
+  --line:      #e5e5e5;
+  --line-dark: #c2c2c2;
+  --paper:     #ffffff;
+  --cream:     #f3efe8;
+  --accent:    #0099ff;
+
+  --fs-1: clamp(2.25rem, 5vw, 3.75rem);
+  --fs-2: clamp(1.875rem, 3.5vw, 2.75rem);
+  --fs-3: clamp(1.25rem, 2vw, 1.625rem);
+  --fs-body: 1rem;
+
+  --max: 1280px;
+  --pad: clamp(1.25rem, 4vw, 3rem);
+
+  --radius: 16px;
+  --radius-lg: 24px;
+}
+
+/* ─── Reset ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper); color: var(--ink);
+  font: 400 var(--fs-body)/1.5 "Aeonik", -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, video, svg { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+ul { list-style: none; }
+
+/* ─── Layout primitives ──────────────────────────────────────── */
+.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--pad); }
+section { padding-block: clamp(3rem, 7vw, 6rem); }
+.eyebrow { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); font-weight: 500; }
+.h1 { font-weight: 500; font-size: var(--fs-1); line-height: 1.05; letter-spacing: -.025em; }
+.h2 { font-weight: 500; font-size: var(--fs-2); line-height: 1.1; letter-spacing: -.02em; }
+.h3 { font-weight: 500; font-size: var(--fs-3); line-height: 1.25; letter-spacing: -.01em; }
+.lede { font-size: 1rem; line-height: 1.55; color: var(--ink-soft); max-width: 36rem; }
+
+/* ─── Top nav ────────────────────────────────────────────────── */
+.nav { position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter: saturate(180%) blur(10px); -webkit-backdrop-filter: saturate(180%) blur(10px); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.1rem; }
+.logo { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; font-weight: 500; font-size: 1rem; }
+.logo svg { width: 26px; height: 17px; fill: currentColor; }
+.nav-links { display: flex; gap: 1.75rem; font-size: .9375rem; }
+.nav-links a { color: var(--muted); text-decoration: none; transition: color .15s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-cta { background: var(--ink); color: var(--paper); padding: .55rem 1.1rem; border-radius: 999px; text-decoration: none; font-size: .875rem; font-weight: 500; white-space: nowrap; }
+.nav-cta:hover { background: var(--ink-soft); }
+@media (max-width: 720px) { .nav-links { display: none; } }
+
+/* ─── Hero ───────────────────────────────────────────────────── */
+.hero { padding-block: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 3vw, 2.5rem); }
+.hero-head { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: end; margin-bottom: clamp(2rem, 4vw, 3rem); }
+.hero-head .h1 { max-width: 16ch; }
+.hero-sub { font-size: 1rem; line-height: 1.55; color: var(--ink-soft); max-width: 30rem; }
+@media (max-width: 720px) { .hero-head { grid-template-columns: 1fr; gap: 1rem; align-items: start; } }
+
+/* Browser-window framing */
+.window { border-radius: var(--radius-lg); overflow: hidden; background: #1a1a1a; box-shadow: 0 30px 80px -20px rgba(0,0,0,.25); }
+.window-bar { display: flex; align-items: center; gap: .4rem; padding: .65rem 1rem; background: #f7f7f5; border-bottom: 1px solid var(--line); }
+.window-bar .dot { width: 11px; height: 11px; border-radius: 50%; background: #ddd; }
+.window-bar .dot.r { background: #ff5f57; }
+.window-bar .dot.y { background: #febc2e; }
+.window-bar .dot.g { background: #28c840; }
+.window-body { position: relative; aspect-ratio: 16/9; background: #111; }
+.window-body video, .window-body img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.window-overlay { position: absolute; pointer-events: none; }
+.terminal { top: 1.25rem; left: 1.25rem; max-width: 420px; padding: 1rem 1.1rem; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .75rem; color: #d8d8d8; line-height: 1.6; pointer-events: auto; }
+.terminal .ts { color: #888; margin-right: .5em; }
+.composer { left: 50%; bottom: 1.25rem; transform: translateX(-50%); width: min(640px, calc(100% - 2.5rem)); padding: 1rem 1.25rem; background: rgba(255,255,255,.96); backdrop-filter: blur(8px); border-radius: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .85rem; line-height: 1.6; color: #111; pointer-events: auto; box-shadow: 0 6px 24px rgba(0,0,0,.18); }
+.composer .hl-y { background: #fef3a3; padding: 0 .2em; border-radius: 3px; }
+.composer .hl-o { background: #ffd9a8; padding: 0 .2em; border-radius: 3px; }
+.composer .hl-b { background: #c7e3ff; padding: 0 .2em; border-radius: 3px; }
+.composer .hl-g { background: #c8eecc; padding: 0 .2em; border-radius: 3px; }
+.composer .hl-p { background: #efd1f3; padding: 0 .2em; border-radius: 3px; }
+.composer-foot { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .75rem; padding-top: .5rem; border-top: 1px solid #eee; font-size: .75rem; color: var(--muted); }
+.composer-foot .filename { font-family: inherit; }
+.composer-foot .start { background: var(--ink); color: #fff; padding: .35rem .75rem; border-radius: 999px; font-weight: 500; }
+@media (max-width: 720px) { .terminal { max-width: 220px; font-size: .65rem; padding: .65rem .8rem; } .composer { font-size: .7rem; padding: .65rem .8rem; bottom: .75rem; } }
+
+/* ─── Carousel strip ─────────────────────────────────────────── */
+.carousel-head { margin-bottom: 2rem; max-width: 38rem; }
+.carousel-head .h2 { margin-top: .5rem; }
+.carousel-head p { margin-top: 1rem; }
+.carousel { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(min(420px,80vw), 1fr); gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(-1 * var(--pad)); padding: .5rem var(--pad) 1.5rem; scrollbar-width: thin; }
+.slide { scroll-snap-align: start; border-radius: var(--radius); overflow: hidden; background: #111; position: relative; aspect-ratio: 4/3; }
+.slide video, .slide img { width: 100%; height: 100%; object-fit: cover; }
+.slide-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 2rem 1.25rem .9rem; color: #fff; font-size: .9375rem; background: linear-gradient(transparent, rgba(0,0,0,.6)); }
+
+/* ─── RobotGPT scene ─────────────────────────────────────────── */
+.gpt { border-radius: var(--radius-lg); overflow: hidden; background: #111; position: relative; min-height: clamp(400px, 50vw, 600px); display: flex; align-items: flex-end; }
+.gpt-bg { position: absolute; inset: 0; }
+.gpt-bg video, .gpt-bg img { width: 100%; height: 100%; object-fit: cover; }
+.gpt-content { position: relative; padding: clamp(2rem, 5vw, 4rem); width: 100%; display: grid; grid-template-columns: 1fr 1.4fr; gap: 2rem; align-items: end; color: #fff; }
+.gpt-eyebrow { color: rgba(255,255,255,.7); margin-bottom: .75rem; }
+.gpt-content > div:first-child p { color: rgba(255,255,255,.9); max-width: 26ch; }
+.gpt-quote { font-weight: 500; font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.15; letter-spacing: -.01em; }
+.gpt-quote .hl { background: var(--paper); color: var(--ink); padding: 0 .25em; border-radius: 4px; }
+@media (max-width: 800px) { .gpt-content { grid-template-columns: 1fr; gap: 1rem; } }
+
+/* ─── Features (4 across, flat) ──────────────────────────────── */
+.features-head { margin-bottom: 3rem; max-width: 32ch; }
+.features-head .h2 { margin-top: .5rem; }
+.features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem; }
+.feat { display: grid; gap: 1rem; }
+.feat-icon { width: 48px; height: 48px; }
+.feat-icon img { width: 100%; height: 100%; object-fit: contain; }
+.feat h3 { font-weight: 500; font-size: 1.125rem; line-height: 1.3; max-width: 18ch; }
+.feat p { color: var(--ink-soft); line-height: 1.55; font-size: .9375rem; }
+@media (max-width: 1000px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .features-grid { grid-template-columns: 1fr; } }
+
+/* ─── Robots showcase ────────────────────────────────────────── */
+.robots { background: var(--cream); border-radius: var(--radius-lg); padding: clamp(2.5rem, 5vw, 4rem); text-align: center; }
+.robots .h2 { max-width: 24ch; margin-inline: auto; margin-bottom: 3rem; }
+.robots-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1rem; align-items: end; }
+.robots-row img { width: 100%; height: auto; max-height: 140px; object-fit: contain; }
+@media (max-width: 800px) { .robots-row { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 480px) { .robots-row { grid-template-columns: repeat(3, 1fr); } }
+
+/* ─── Section heading ────────────────────────────────────────── */
+.sect-head { display: grid; gap: .75rem; margin-bottom: 2.5rem; max-width: 44rem; }
+.sect-head .h2 { margin-top: .25rem; }
+.sect-head .lede { margin-top: .25rem; }
+
+.sect-head-row { display: flex; justify-content: space-between; align-items: end; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.sect-head-row .text { display: grid; gap: .5rem; max-width: 36rem; }
+.sect-head-row .text .h2 { margin-top: .25rem; }
+
+/* ─── Team roster ───────────────────────────────────────────── */
+.roster { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 clamp(2rem, 5vw, 5rem); }
+.roster li { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding-block: 1rem; border-bottom: 1px solid var(--line); align-items: baseline; }
+.roster li > span:first-child { font-weight: 500; }
+.roster .role { color: var(--muted); font-size: .9375rem; }
+@media (max-width: 700px) { .roster { grid-template-columns: 1fr; } }
+
+/* ─── Advisors (plain list, multi-col) ───────────────────────── */
+.advisors-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 clamp(2rem, 5vw, 5rem); }
+.advisors-list li { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
+.advisors-list a { text-decoration: none; }
+.advisors-list a:hover { color: var(--accent); }
+.advisors-list .arrow { color: var(--muted); font-size: .85rem; }
+@media (max-width: 800px) { .advisors-list { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .advisors-list { grid-template-columns: 1fr; } }
+
+/* ─── Open roles ─────────────────────────────────────────────── */
+.roles { display: grid; gap: 0; }
+.role-card { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 1.5rem; align-items: center; padding: 1.25rem 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; transition: padding-left .15s; }
+.role-card:hover { padding-left: .5rem; }
+.role-card .title { font-weight: 500; }
+.role-card .pill { font-size: .9375rem; color: var(--muted); }
+.role-card .apply { font-weight: 500; font-size: .9375rem; white-space: nowrap; color: var(--accent); }
+@media (max-width: 700px) { .role-card { grid-template-columns: 1fr auto; } .role-card .pill { display: none; } }
+
+/* ─── Big CTA with bg image ──────────────────────────────────── */
+.cta { background: var(--ink); color: var(--paper); border-radius: var(--radius-lg); overflow: hidden; position: relative; min-height: clamp(320px, 38vw, 460px); display: flex; align-items: center; }
+.cta-bg { position: absolute; inset: 0; }
+.cta-bg img { width: 100%; height: 100%; object-fit: cover; }
+.cta-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,10,.92), rgba(10,10,10,.4)); }
+.cta-content { position: relative; padding: clamp(2.5rem, 5vw, 4rem); max-width: 36rem; }
+.cta-content h2 { margin-bottom: 1.25rem; }
+.cta-content p { color: rgba(255,255,255,.85); margin-bottom: 2rem; line-height: 1.55; }
+
+.btn { display: inline-block; background: var(--paper); color: var(--ink); padding: .8rem 1.5rem; border-radius: 999px; text-decoration: none; font-weight: 500; transition: transform .1s; font-size: .9375rem; }
+.btn:hover { transform: translateY(-1px); }
+.btn-dark { background: var(--ink); color: var(--paper); }
+
+.enterprise { display: grid; grid-template-columns: 2fr auto; gap: 2rem; align-items: center; padding-block: 2rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.enterprise .text h3 { font-weight: 500; font-size: 1.375rem; line-height: 1.3; margin-bottom: .25rem; }
+.enterprise .text p { color: var(--muted); }
+@media (max-width: 700px) { .enterprise { grid-template-columns: 1fr; gap: 1rem; } }
+
+/* ─── Footer ─────────────────────────────────────────────────── */
+footer { padding-block: 2.5rem 3rem; }
+.foot-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+.foot-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.foot-links a { color: var(--muted); text-decoration: none; font-size: .9375rem; }
+.foot-links a:hover { color: var(--ink); }
+.copy { color: var(--muted); font-size: .875rem; }
+</style>
+</head>
+<body>
+<style>
+.__design_switcher{display:none;position:fixed;top:12px;left:50%;transform:translateX(-50%);background:#111;color:#f7f2e8;padding:.35rem .5rem;border-radius:999px;font:500 13px/1 -apple-system,BlinkMacSystemFont,"Inter",sans-serif;z-index:2147483647;gap:.25rem;align-items:center;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.__design_switcher.on{display:flex}
+.__design_switcher>span{padding:.25rem .7rem;opacity:.55;letter-spacing:.08em;text-transform:uppercase;font-size:10px}
+.__design_switcher a{color:inherit;text-decoration:none;padding:.35rem .8rem;border-radius:999px;transition:background .15s}
+.__design_switcher a:hover{background:#2a2a2a}
+.__design_switcher a.active{background:#f7f2e8;color:#111;font-weight:700}
+</style>
+<nav class="__design_switcher" id="__design_switcher">
+  <span>Design</span>
+  <a href="/">Framer</a>
+  <a href="/main.html" class="active">Main</a>
+  <a href="/magazine.html">Magazine</a>
+</nav>
+<script>(function(){if(new URLSearchParams(location.search).get('switcher')==='true'){var el=document.getElementById('__design_switcher');if(el){el.classList.add('on');document.querySelectorAll('#__design_switcher a').forEach(function(a){var u=new URL(a.href,location.origin);u.searchParams.set('switcher','true');a.href=u.pathname+u.search})}}})();</script>
+
+
+<!-- Nav -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="/">
+      <svg viewBox="0 0 26 17" fill="currentColor"><path d="M18 .44C22.37.44 25.92 3.99 25.92 8.36 25.92 12.73 22.37 16.28 18 16.28H7.92C3.55 16.28 0 12.73 0 8.36 0 3.99 3.55.44 7.92.44H18ZM7.92 3.32c-2.78 0-5.04 2.26-5.04 5.04 0 2.78 2.26 5.04 5.04 5.04H18c2.78 0 5.04-2.26 5.04-5.04 0-2.78-2.26-5.04-5.04-5.04h-1.65c-.33 0-.6.24-.8.5-.26.35-.68.58-1.15.58h-2.88c-.47 0-.89-.23-1.15-.58-.2-.26-.47-.5-.8-.5H7.92ZM7.92 6.2c1.2 0 2.16.97 2.16 2.16 0 1.19-.97 2.16-2.16 2.16-1.19 0-2.16-.97-2.16-2.16 0-1.19.97-2.16 2.16-2.16ZM18 6.2c1.19 0 2.16.97 2.16 2.16 0 1.19-.97 2.16-2.16 2.16-1.19 0-2.16-.97-2.16-2.16 0-1.19.97-2.16 2.16-2.16Z"/></svg>
+      Lucky Robots
+    </a>
+    <nav class="nav-links">
+      <a href="#robotgpt">RobotGPT</a><a href="#features">Features</a><a href="#team">Team</a><a href="./jobs">Open Roles</a>
+    </nav>
+    <a class="nav-cta" href="./jobs">Join Our Team</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-head">
+      <h1 class="h1">Infinite Data Generation<br>for Robotic AI</h1>
+      <p class="hero-sub">Train up to 90% faster and cheaper with hyper-realistic simulations at scale. Generate millions of randomized labeled episodes overnight. No hardware, no manual labeling, no bottlenecks.</p>
+    </div>
+
+    <!-- Browser-window product mockup -->
+    <div class="window">
+      <div class="window-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+      <div class="window-body">
+        
+        <video src="https://landingpage.luckyrobots.com/videos/jrekiKPWFtDVjZKVTENYvuORo.mp4" poster="https://landingpage.luckyrobots.com/images/YHmBV2ispMwaqCYXEHsDVbsSzDs.png" autoplay loop muted playsinline preload="metadata"></video>
+        
+
+        <!-- Terminal log overlay -->
+        <div class="window-overlay terminal">
+          <div><span class="ts">16:36:02</span>Booting system</div><div><span class="ts">16:36:03</span>Loading initial command</div><div><span class="ts">16:36:03</span>"Tidy up living room"</div><div><span class="ts">16:36:03</span>Starting path</div><div><span class="ts">16:36:04</span>Locating first item</div><div><span class="ts">16:36:10</span>Retrieving item</div><div><span class="ts">16:36:16</span>Item pickup successful</div><div><span class="ts">16:36:21</span>Task "Pick up item" complete</div><div><span class="ts">16:36:24</span>Locating drop off location</div>
+        </div>
+
+        <!-- Command composer overlay -->
+        <div class="window-overlay composer">
+          A <span class="hl-b">Unitree G1</span> robot in a <span class="hl-y">modern open-plan living space.</span><br>
+          Scan the <span class="hl-g">room</span>
+          to <span class="hl-o">pick and place</span> <span class="hl-p">clutter</span> into the <span class="hl-y">bin.</span>
+          Item locations should be <span class="hl-g">randomly generated.</span>
+          <div class="composer-foot">
+            <span class="filename">📁 .../sim/untitled</span>
+            <span>1M Episodes</span>
+            <span class="start">START ▸</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Carousel -->
+<section>
+  <div class="wrap carousel-head">
+    <p class="eyebrow">Field notes from the simulation</p>
+    <h2 class="h2">Bringing real-world messiness into virtual training</h2>
+    <p class="lede">From cluttered kitchens to rugged terrain, your AI trains in rich, interactive scenes where even the smallest detail shapes behavior. All of the robots and simulations seen here are available today at Lucky Robots — ready to use, train, and extend.</p>
+  </div>
+  <div class="wrap">
+    <div class="carousel">
+      
+      <div class="slide">
+        <video src="https://landingpage.luckyrobots.com/videos/svNpRSMqz5a2FZARxLfeCxFadUs.mp4" poster="https://landingpage.luckyrobots.com/images/jwoVT3YeJV6cB5rPKBc2luRc.png" autoplay loop muted playsinline preload="metadata"></video>
+        
+        <div class="slide-caption">Our new drone model exploring our forest environment</div>
+      </div>
+      
+      <div class="slide">
+        <video src="https://landingpage.luckyrobots.com/videos/cQbitKD1YN8USmD5DCHVaXxSLc.mp4" poster="https://landingpage.luckyrobots.com/images/N0LXO1OuP7NbzzECBSqqpMj3mnc.png" autoplay loop muted playsinline preload="metadata"></video>
+        
+        <div class="slide-caption">A Unitree G1 exploring one of our available environments</div>
+      </div>
+      
+      <div class="slide">
+        <video src="https://landingpage.luckyrobots.com/videos/Fz8BsnRlgQCFYCYAeYX5cNngk.mp4" poster="https://landingpage.luckyrobots.com/images/z00QpSxMqINlEOnIsNaxY9snQ.png" autoplay loop muted playsinline preload="metadata"></video>
+        
+        <div class="slide-caption">Unitree G1 standing in simulation</div>
+      </div>
+      
+      <div class="slide">
+        <video src="https://landingpage.luckyrobots.com/videos/WRjpcFLWxK208ble8rg3zcaOlNI.mp4" poster="https://landingpage.luckyrobots.com/images/x0XKfTJBViuvbRVTTxEYlq3Uo.png" autoplay loop muted playsinline preload="metadata"></video>
+        
+        <div class="slide-caption">A Unitree G1 exploring one of our available environments</div>
+      </div>
+      
+      <div class="slide">
+        <img src="https://landingpage.luckyrobots.com/images/skBdmCi64GKjAv8vIOcq409nwVo.jpeg" alt="A Hello Robot Stretch 3 ready to use in LuckyRobots" loading="lazy">
+        <div class="slide-caption">A Hello Robot Stretch 3 ready to use in LuckyRobots</div>
+      </div>
+      
+      <div class="slide">
+        <img src="https://landingpage.luckyrobots.com/images/HIm3hcI6EvDVW1CPehLwTbA3VA.png" alt="A Unitree G1 exploring our outdoor environment" loading="lazy">
+        <div class="slide-caption">A Unitree G1 exploring our outdoor environment</div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- RobotGPT -->
+<section id="robotgpt">
+  <div class="wrap">
+    <div class="gpt">
+      
+      <div class="gpt-bg">
+        <video src="https://landingpage.luckyrobots.com/videos/disCAHkAZBJxdqKc6pJRkaoZTbo.mp4" poster="https://landingpage.luckyrobots.com/images/5UTk04C1H5QqJgb9w8q7W2z4.png" autoplay loop muted playsinline preload="metadata"></video>
+      </div>
+      
+      <div class="gpt-content">
+        <div>
+          <p class="gpt-eyebrow eyebrow">RobotGPT</p>
+          <p>Control your scene with natural language – ask your robot to perform tasks like you speak</p>
+        </div>
+        <p class="gpt-quote">RobotGPT, I think I left my <span class="hl">stove</span> on.<br>Can you turn it off for me?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <div class="wrap">
+    <div class="features-head">
+      <p class="eyebrow">The platform</p>
+      <h2 class="h2">Everything you need to train smarter, faster robotic AI</h2>
+    </div>
+    <div class="features-grid">
+      
+      <article class="feat">
+        <div class="feat-icon"><img src="https://landingpage.luckyrobots.com/images/JKiFinyAA6wtOq3GJeMxwNRMNk.png" alt=""></div>
+        <h3>Realistic Physics & Environments</h3>
+        <p>Train robots in high-fidelity Lucky Engine environments that replicate real-world physics – from precise collisions and friction to sensor feedback and realistic material behaviours.</p>
+      </article>
+      
+      <article class="feat">
+        <div class="feat-icon"><img src="https://landingpage.luckyrobots.com/images/T6iXjnsgSUkVKvCc6CxVqna7LA.png" alt=""></div>
+        <h3>Infinite synthetic data, on demand</h3>
+        <p>Generate millions of randomized, labeled training episodes. No physical hardware, no manual labeling, no bottlenecks – just scalable data built to train serious AI.</p>
+      </article>
+      
+      <article class="feat">
+        <div class="feat-icon"><img src="https://landingpage.luckyrobots.com/images/cC0aB4wCzdsrGAJYkexHxlbVcOI.png" alt=""></div>
+        <h3>Cut costs without cutting corners</h3>
+        <p>No warehouses, robots, or massive teams required here. Simulate edge cases, iterate faster, and cut development costs and time by up to 90% without compromising quality.</p>
+      </article>
+      
+      <article class="feat">
+        <div class="feat-icon"><img src="https://landingpage.luckyrobots.com/images/Kn07Ab7wEOgfSTNSLStXscqpM.png" alt=""></div>
+        <h3>Collaborate, share, and deploy with LuckyHub</h3>
+        <p>Push and pull AI models, share environments, and manage training workflows with a platform built for open robotics development. LuckyHub makes it easy to scale your work and stay in sync.</p>
+      </article>
+      
+    </div>
+  </div>
+</section>
+
+<!-- Robots showcase -->
+<section>
+  <div class="wrap">
+    <div class="robots">
+      <h2 class="h2">Choose from any commercially available robot or bring your own</h2>
+      <div class="robots-row">
+        <img src="https://landingpage.luckyrobots.com/images/1AV4LS9rjfInZ1NyB1GB2HfhyE.png" alt=""><img src="https://landingpage.luckyrobots.com/images/fa3V1vNP2WghyJoADp1eZI5ui8.png" alt=""><img src="https://landingpage.luckyrobots.com/images/PWGZJGbwNlN0n86KNiDoFqy2xm0.png" alt=""><img src="https://landingpage.luckyrobots.com/images/qOKApWIzCkJrke09HwUf1QNNw.png" alt=""><img src="https://landingpage.luckyrobots.com/images/ZUMQ8G3mqIt8dpP0enKRtRFhcA.png" alt=""><img src="https://landingpage.luckyrobots.com/images/pu4Sd6xEyDLDZRE2IGwxLjFGLYo.png" alt=""><img src="https://landingpage.luckyrobots.com/images/GArsIqsbn06bxr0pgvVzRHDFs.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section id="team">
+  <div class="wrap">
+    <div class="sect-head-row">
+      <div class="text">
+        <p class="eyebrow">The people</p>
+        <h2 class="h2">The People Behind Lucky Robots</h2>
+        <p class="lede">Backed by belief in a better system, we bring together top talent, backers, and integrations to accelerate the future of robotics. Join us!</p>
+      </div>
+      <a class="btn btn-dark" href="./jobs">Join Our Team →</a>
+    </div>
+    <ul class="roster">
+      <li><span>Devrim</span><span class="role">Founder & CEO</span></li><li><span>Artia</span><span class="role">Cofounder/COO</span></li><li><span>Yan</span><span class="role">CTO, Core</span></li><li><span>Harrison</span><span class="role">Director of Engineering, AI</span></li><li><span>Anuj</span><span class="role">Founding Research Engineer</span></li><li><span>Kieran</span><span class="role">Founding Designer</span></li><li><span>Ethan</span><span class="role">Founding Research Engineer</span></li><li><span>Constantin</span><span class="role">Drone Simulation Engineer</span></li><li><span>Ludwig</span><span class="role">Senior Game Engine Developer</span></li><li><span>Noah</span><span class="role">Founding Game Engine Developer</span></li><li><span>Jim</span><span class="role">Senior Software Engineer</span></li><li><span>Michael</span><span class="role">Senior Software Engineer</span></li><li><span>Tommy</span><span class="role">Game Engine Developer</span></li><li><span>Nur</span><span class="role">CoS / Ops</span></li><li><span>Neal</span><span class="role">Software Engineer</span></li><li><span>Emily</span><span class="role">Software Engineer</span></li><li><span>Ozgur</span><span class="role">CI/CD Engineer</span></li><li><span>Bailey</span><span class="role">Software Engineer</span></li><li><span>Gurkan</span><span class="role">Game Engine Developer</span></li><li><span>Ecem</span><span class="role">VA</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Advisors -->
+<section>
+  <div class="wrap">
+    <div class="sect-head">
+      <p class="eyebrow">The brain trust</p>
+      <h2 class="h2">Advisors Of The Project</h2>
+      <p class="lede">These brilliant folks help us find answers when we get stuck.</p>
+    </div>
+    <ul class="advisors-list">
+      
+      <li>
+        <a href="https://yanjieze.com/" target="_blank" rel="noopener"><span>Yanjie Ze</span></a><span class="arrow">↗</span>
+        
+      </li>
+      
+      <li>
+        <a href="https://x.com/chris_j_paxton" target="_blank" rel="noopener"><span>Chris Paxton</span></a><span class="arrow">↗</span>
+        
+      </li>
+      
+      <li>
+        <span>Roger Dickey</span><span></span>
+      </li>
+      
+      <li>
+        <a href="https://x.com/neil_nie_" target="_blank" rel="noopener"><span>Neil Nie</span></a><span class="arrow">↗</span>
+        
+      </li>
+      
+      <li>
+        <a href="https://x.com/ChongZitaZhang" target="_blank" rel="noopener"><span>Chong Zhang</span></a><span class="arrow">↗</span>
+        
+      </li>
+      
+      <li>
+        <span>Alex Sutherland</span><span></span>
+      </li>
+      
+    </ul>
+  </div>
+</section>
+
+<!-- Open roles -->
+<section>
+  <div class="wrap">
+    <div class="sect-head-row">
+      <div class="text">
+        <p class="eyebrow">We're hiring</p>
+        <h2 class="h2">Open positions</h2>
+      </div>
+      <a class="btn btn-dark" href="./jobs">View All Open Roles →</a>
+    </div>
+    <div class="roles">
+      <a class="role-card" href="./jobs/software-engineer"><span class="title">Software Engineer (C++) - Core/Game Engine</span><span class="pill">Full Time</span><span class="pill">United States</span><span class="apply">Apply Now ↗</span></a><a class="role-card" href="./jobs/software-engineer-2"><span class="title">Software Engineer (C++) - Core/Game Engine</span><span class="pill">Full Time</span><span class="pill">Melbourne, Victoria, Australia</span><span class="apply">Apply Now ↗</span></a><a class="role-card" href="./jobs/rendering-engineer"><span class="title">Rendering Engineer - Core/Game Engine</span><span class="pill">Full Time</span><span class="pill">Melbourne, Victoria, Australia</span><span class="apply">Apply Now ↗</span></a><a class="role-card" href="./jobs/research-eng"><span class="title">Research Engineer (ML, Perception and Manipulation)</span><span class="pill">Full Time</span><span class="pill">Remote, Worldwide</span><span class="apply">Apply Now ↗</span></a><a class="role-card" href="./jobs/founding-research-eng"><span class="title">Founding Research Engineer (ML, Perception and Manipulation)</span><span class="pill">Full Time</span><span class="pill">Remote, US</span><span class="apply">Apply Now ↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Big CTA -->
+<section>
+  <div class="wrap">
+    <div class="cta">
+      <div class="cta-bg"><img src="https://landingpage.luckyrobots.com/images/IZAHIpGTt5n6DTGD4DYcYJM9R9Y.png" alt="" loading="lazy"></div>
+      <div class="cta-content">
+        <h2 class="h2">Get your robots ready for the real world.</h2>
+        <p>Whether you're building cutting-edge AI, refining autonomous systems, or accelerating robotics research, Lucky gives you the synthetic data and simulation muscle to move faster — without compromise.</p>
+        <a class="btn" href="./contact">Get Started →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Enterprise -->
+<section style="padding-block: 2rem clamp(3rem, 6vw, 5rem)">
+  <div class="wrap">
+    <div class="enterprise">
+      <div class="text">
+        <h3>Need custom simulations or private cloud deployments?</h3>
+        <p>Get in touch with our Enterprise team.</p>
+      </div>
+      <a class="btn btn-dark" href="mailto:hello@luckyrobots.com">Request Demo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap foot-inner">
+    <span class="copy">© Lucky Robots</span>
+    <ul class="foot-links">
+      <li><a href="https://github.com/luckyrobots">Visit Our Github</a></li><li><a href="https://discord.gg/luckyrobots">Join Us On Discord</a></li><li><a href="https://x.com/luckyrobots">Find Us On X</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

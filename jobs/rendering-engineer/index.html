@@ -91,6 +91,7 @@ footer a:hover { color: var(--ink); }
 <nav class="__design_switcher" id="__design_switcher">
   <span>Design</span>
   <a href="/" class="active">Framer</a>
+  <a href="/main.html">Main</a>
   <a href="/magazine.html">Magazine</a>
 </nav>
 <script>(function(){if(new URLSearchParams(location.search).get('switcher')==='true'){var el=document.getElementById('__design_switcher');if(el){el.classList.add('on');document.querySelectorAll('#__design_switcher a').forEach(function(a){var u=new URL(a.href,location.origin);u.searchParams.set('switcher','true');a.href=u.pathname+u.search})}}})();</script>
