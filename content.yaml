@@ -187,7 +187,6 @@ team:
   - { name: "Emily",      role: "Software Engineer" }
   - { name: "Ozgur",      role: "CI/CD Engineer" }
   - { name: "Bailey",     role: "Software Engineer" }
-  - { name: "Gurkan",     role: "Game Engine Developer" }
   - { name: "Ecem",       role: "VA" }
 
 # Fold 7: Advisors section
